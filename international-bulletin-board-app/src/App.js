@@ -1,14 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import Main from './main.js'
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1 className='text-success'>
-          Setup
-        </h1>
-      </header>
+      <Main />
+      
     </div>
   );
 }
