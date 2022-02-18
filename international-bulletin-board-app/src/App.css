@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 #notesBox {
@@ -19,4 +20,24 @@ button {
   color: white !important;
   padding: 0.5em 1em;
   border: none;
+}
+
+.backdrop {
+  background-color: rgb(77, 75, 75);
+  height: 100vh;
+}
+
+#noteForm {
+  filter: none !important;
+  width: 75%;
+  margin: auto;
+  height: 75%;
+}
+#noteForm > * {
+  background-color: wheat;
+  width: 100%;
+}
+
+#note-color {
+  width: 50%;
 }
