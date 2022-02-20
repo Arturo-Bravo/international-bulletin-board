@@ -12,6 +12,10 @@ import App from "./App";
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
 useEffect(() => {
+	let root = document.getElementById('root');
+	root.className='';
+
+	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
 }, [])
 
 	let notes = [

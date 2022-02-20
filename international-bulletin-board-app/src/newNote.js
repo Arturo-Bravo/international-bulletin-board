@@ -14,14 +14,11 @@ function NewNote()  {
 	const [noteText, setNote] = useState("");
 	const options = [
 		{ value: 'yellow', label: 'Yellow'},
-		{ value: 'red', label: 'red'},
-		{ value: 'purple', label: 'purple'},
+		{ value: 'red', label: 'Red'},
+		{ value: 'purple', label: 'Purple'},
 	]
 	
 	const navigate = useNavigate();
-	//WIP TODO this sends you back to main but it has a bug, and the form doesn't get submitted
-	const handleClick = () => {
-	}
 
 	const noteCreate = (event) => {
 		event.preventDefault();
@@ -30,22 +27,31 @@ function NewNote()  {
 	};
 
 	return(
-		<div id="noteForm" className="d-flex align-items-center justify-content-center">
+		<div id="noteForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10">
 			<div className="p-4">
-			New Note
-			<form onSubmit={noteCreate}>
-				<label htmlFor="color">Select Color:</label>
-				<Select options={options}/>
-				<textarea 
-					aria-label="text" 
-					name="text"
-					className="form-control mt-2" 
-					id="text" cols="30" rows="10"
-					// value={this.noteText} for some reason this does not work idk why
-					onChange={(e) => setNote(e.target.value)}
-				></textarea>
-				<input type="submit" className="mt-4" value={'Submit'} />
-			</form>
+				<h1>New Note</h1>
+				<form onSubmit={noteCreate} className="" >
+					<div className="form-group d-flex justify-content-between align-items-center">
+						<label className="select-color" htmlFor="color">Select Color:</label>
+						{/* documentation: https://react-select.com/home 
+						Also making the parent div a row or a class container messes with the width of the options
+						so do not make it a row or contatiner*/}
+						<Select  
+							id="selectColor"
+							options={options}
+							className="select-color"
+						/>
+					</div>
+					<textarea 
+						aria-label="text" 
+						name="text"
+						className="mt-2" 
+						id="noteText"
+						// value={this.noteText} for some reason this does not work idk why
+						onChange={(e) => setNote(e.target.value)}
+					></textarea>
+					<input type="submit" className="mt-4" value={'Submit'} />
+				</form>
 			</div>
 		</div>
 	)
