@@ -4,7 +4,6 @@ import Select from 'react-select';
 
 function NewNote()  {
 	useEffect(() => {
-		console.log('Hello')
 		let back = document.getElementById('root');
 		back.classList.add('backdrop');
 
@@ -12,7 +11,8 @@ function NewNote()  {
 
 	//Form variables
 	const [noteText, setNote] = useState("");
-	const [selectedColor, setColor] = useState([])
+	//const [selectedColor, setColor] = useState([])
+	let selectedColor = [];
 
 
 	//Set Colors here in value
@@ -30,8 +30,7 @@ function NewNote()  {
 	}
 
 	const handleColorChange= e =>{
-		setColor(e)
-		console.log(selectedColor.value)
+		selectedColor = e;
 		let note = document.getElementById('noteForm');
 		note.style.backgroundColor = selectedColor.value;
 	}
