@@ -27,14 +27,14 @@ button {
   height: 100vh;
 }
 
-#noteForm {
+#parentForm {
   filter: none !important;
   margin: auto;
   height: 75%;
 }
-#noteForm > * {
-  background-color: #feff9c;
+#noteForm {
   width: 100%;
+  background-color: white;
 }
 
 #noteText {
@@ -45,4 +45,8 @@ button {
 
 .select-color {
   width: 50%;
+}
+
+#selectColor {
+  color: rgb(48, 48, 48) !important;
 }
