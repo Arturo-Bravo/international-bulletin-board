@@ -1,22 +1,39 @@
+import React, {Component} from "react";
+import axios from "axios"
 
-const Main = (argument1, argument2) => {
+export default class Main extends Component{
+
 //We can pass data through components like so
-
-	let notes = [
-		'Today was a good day in Oregon',
-		'Saludos de Michoacan',
-		'Сегодня моя машина взорвалась'
-	]
-
+constructor() {
+	super();
+	this.state = {
+		data : "nothing yet",
+		notes : [
+			'Today was a good day in Oregon',
+			'Saludos de Michoacan',
+			'Сегодня моя машина взорвалась'
+		]
+	};
+}
+	componentDidMount = () =>{
+		axios("/").then(response => { 
+			this.setState({
+				data : response.data.data
+			})
+		});
+	}
+	
+	render(){
 	return(
 		<div>
+			<h1>Hi</h1>
 			<header>
 				<h1 className="my-2">Notes From Around the World</h1>
 			</header>
 			<div className="container-fluid">
 				<div id="notesBox" className="row justify-content-center">
 					<div className="col-10">
-						{notes.map(note => (
+						{this.state.notes.map(note => (
 							<div className="note m-2 shadow p-2"> {note} </div>
 						))}
 					</div>
@@ -26,9 +43,9 @@ const Main = (argument1, argument2) => {
 				<button>New Note</button>
 				<button>View Random</button>
 			</footer>
+			<h1>data from backend is: {this.state.data}</h1>
 		</div>
 
 	)
+	}
 }
-
-export default Main;
