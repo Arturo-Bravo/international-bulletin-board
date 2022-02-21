@@ -15,13 +15,21 @@ constructor() {
 		]
 	};
 }
-	componentDidMount = () =>{
-		axios("/").then(response => { 
-			this.setState({
-				data : response.data.data
-			})
-		});
-	}
+componentDidMount() {
+    this.mydata()
+      .then(res => this.setState({ data: res.message }))
+      .catch(err => console.log(err));
+  }
+
+  mydata = async () => {
+    const response = await fetch('/backend');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+  };
 	
 	render(){
 	return(
