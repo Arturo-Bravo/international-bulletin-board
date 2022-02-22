@@ -25,6 +25,7 @@ function createNoteTable(db) {
   });
 }
 
+// TODO: Add version for parent note
 // Insert into table
 function insertNote(db, detected_language, note_color, message) {
   db.serialize(() => {
@@ -42,25 +43,29 @@ function insertNote(db, detected_language, note_color, message) {
   });
 }
 
+// TODO: Change return to actual data return instead of console log
 // Get specific note info
-function getNote(note_id) {
-  let query = `SELECT * FROM notes WHERE note_id = ?`;
-  db.get(query, [note_id], (error, row) => {
-    if (error) {
-      return console.error(error.message);
-    }
-    return row
-      ? console.log(
-          row.note_id,
-          row.detected_language,
-          row.note_color,
-          row.parent_note,
-          row.message
-        )
-      : console.log(`No note found with note_id ${note_id}`);
+function getNote(db, note_id) {
+  db.serialize(() => {
+    let query = `SELECT * FROM notes WHERE note_id = ?`;
+    db.get(query, [note_id], (error, row) => {
+      if (error) {
+        return console.error(error.message);
+      }
+      return row
+        ? console.log(
+            row.note_id,
+            row.detected_language,
+            row.note_color,
+            row.parent_note,
+            row.message
+          )
+        : console.log(`No note found with note_id ${note_id}`);
+    });
   });
 }
 
+// TODO: Change return to actual data return instead of console log
 // Get all notes
 function getNotes(db) {
   db.serialize(() => {
@@ -90,5 +95,5 @@ insertNote(db, "spanish", "000000", "donde esta la biblioteca?");
 getNotes(db);
 insertNote(db, "english", "ffffff", "this is the english message!");
 getNotes(db);
+getNote(db, 1);
 db.close();
-// getNote(1);
