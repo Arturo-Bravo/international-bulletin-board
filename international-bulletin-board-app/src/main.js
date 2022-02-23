@@ -7,6 +7,7 @@ import {
 import { useEffect } from "react";
 
 import NewNote from "./newNote";
+import ViewNote from "./viewNote";
 import App from "./App";
 
 const Main = (argument1, argument2) => {
@@ -38,10 +39,11 @@ useEffect(() => {
 			<header >
 				<h1 className="my-2 text-center">Notes From Around the World</h1>
 			</header>
+			<Router>
 			<div className="container-fluid">
 				<div id="notesBox" className="row justify-content-center">
 					<div className="col-10">
-						{notes.map(note => (
+						{notes.map((note, index) => (
 							<Link 
 								to={{
 									pathname:`/view-note/${note.id}`, 
@@ -54,12 +56,18 @@ useEffect(() => {
 				</div>
 			</div>
 			<footer className="d-flex justify-content-around">
-				<a href="/new-note">
+				<Link to={"/new-note"}>
 					<button>New Note</button>
-				</a>
+				</Link>
 				<button>View Random</button>
 			</footer>
 			
+			
+				<Routes>
+						<Route exact path="/new-note" element={<NewNote/>}/>
+						<Route path="/view-note/:noteId" element={<ViewNote/>}/>
+				</Routes>
+			</Router>
 		</div>
 
 	)
