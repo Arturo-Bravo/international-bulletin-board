@@ -36,7 +36,7 @@ useEffect(() => {
 	return(
 		<div>
 			<header >
-				<h1 className="my-2">Notes From Around the World</h1>
+				<h1 className="my-2 text-center">Notes From Around the World</h1>
 			</header>
 			<div className="container-fluid">
 				<div id="notesBox" className="row justify-content-center">

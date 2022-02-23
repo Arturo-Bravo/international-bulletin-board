@@ -12,8 +12,6 @@ function NewNote()  {
 	//Form variables
 	const [noteText, setNote] = useState("");
 	//const [selectedColor, setColor] = useState([])
-	let selectedColor = [];
-
 
 	//Set Colors here in value
 	const options = [
@@ -29,10 +27,9 @@ function NewNote()  {
 		}),
 	}
 
-	const handleColorChange= e =>{
-		selectedColor = e;
+	const handleColorChange = color =>{
 		let note = document.getElementById('noteForm');
-		note.style.backgroundColor = selectedColor.value;
+		note.style.backgroundColor = color.value;
 	}
 
 	
