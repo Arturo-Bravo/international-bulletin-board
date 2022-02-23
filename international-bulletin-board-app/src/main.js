@@ -8,16 +8,17 @@ import { useEffect } from "react";
 
 import NewNote from "./newNote";
 import ViewNote from "./viewNote";
-import App from "./App";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
+	let change = 0;
+
 useEffect(() => {
 	let root = document.getElementById('root');
 	root.className='';
 
 	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-}, [])
+}, [change])
 
 	let notes = [
 		{
@@ -56,7 +57,10 @@ useEffect(() => {
 				</div>
 			</div>
 			<footer className="d-flex justify-content-around">
-				<Link to={"/new-note"}>
+				<Link 
+					to={ '/new-note' }
+					state={{ fromMain: change }}
+				>
 					<button>New Note</button>
 				</Link>
 				<button>View Random</button>
@@ -64,7 +68,7 @@ useEffect(() => {
 			
 			
 				<Routes>
-						<Route exact path="/new-note" element={<NewNote/>}/>
+						<Route path="/new-note" element={<NewNote/>}/>
 						<Route path="/view-note/:noteId" element={<ViewNote/>}/>
 				</Routes>
 			</Router>

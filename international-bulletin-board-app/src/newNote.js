@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import Select from 'react-select';
 
 function NewNote()  {
+	const location = useLocation();
+	let { fromMain } = location.state;
+	console.log(fromMain)
+
 	useEffect(() => {
-		let back = document.getElementById('root');
-		back.classList.add('backdrop');
 
 	}, [])
 
