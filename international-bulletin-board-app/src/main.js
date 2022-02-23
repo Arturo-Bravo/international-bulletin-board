@@ -19,10 +19,19 @@ useEffect(() => {
 }, [])
 
 	let notes = [
-		'Today was a good day in Oregon',
-		'Saludos de Michoacan',
-		'Сегодня моя машина взорвалась'
-	]
+		{
+			text: 'Today was a good day in Oregon',
+			id: '123456'
+		},
+		{
+			text: 'Saludos de Michoacan',
+			id: '999999'
+		},
+		{
+			text: 'Сегодня моя машина взорвалась',
+			id: '111111'
+		}
+  ]
 
 	return(
 		<div>
@@ -33,7 +42,13 @@ useEffect(() => {
 				<div id="notesBox" className="row justify-content-center">
 					<div className="col-10">
 						{notes.map(note => (
-							<div className="note m-2 shadow p-2"> {note} </div>
+							<Link 
+								to={{
+									pathname:`/view-note/${note.id}`, 
+								}}
+							>
+								<div className="note m-2 shadow p-2"> {note.text} </div>
+							</Link>
 						))}
 					</div>
 				</div>

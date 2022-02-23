@@ -7,6 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import NewNote from './newNote';
+import ViewNote from './viewNote';
 
 function App() {
   return (
@@ -14,8 +15,10 @@ function App() {
       
       <Router>
 				<Routes>
-            <Route path="/" element={<Main/>} />
-						<Route path="/new-note" element={<NewNote/>}/>
+            <Route exact path="/" element={<Main/>} />
+						<Route exact path="/new-note" element={<NewNote/>}/>
+						<Route path="/view-note/:noteId" element={<ViewNote/>}/>
+
 				</Routes>
 			</Router> 
     </div>
