@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import axios from "axios"
-
+import { translate } from 'deepl-api';
 export default class Main extends Component{
 
 //We can pass data through components like so
 constructor() {
 	super();
 	this.state = {
-		data : "nothing yet",
+		data : "This is the backed and it works ",
 		notes : [
 			'Today was a good day in Oregon',
 			'Saludos de Michoacan',
@@ -20,15 +20,21 @@ componentDidMount() {
       .then(res => this.setState({ data: res.message }))
       .catch(err => console.log(err));
   }
-
+  
   mydata = async () => {
+
+	const response = await fetch('/backend', { method: 'POST',headers:{'Content-type':"application/json"}, body: JSON.stringify(this.state)});
+	const body = await response.json();
+	return body 
+	  /*
     const response = await fetch('/backend');
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message) 
     }
-    return body;
+	*/
+    //return body;
   };
 	
 	render(){
@@ -51,7 +57,7 @@ componentDidMount() {
 				<button>New Note</button>
 				<button>View Random</button>
 			</footer>
-			<h1>data from backend is: {this.state.data}</h1>
+			<p id="data">data from backend is: {this.state.data}</p>
 		</div>
 
 	)
