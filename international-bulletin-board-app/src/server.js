@@ -10,12 +10,12 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
 
 // create a GET route
-app.post('/backend', (req, res) => { //Line 9
-  const axios = require("axios");
-    var message = req.body.data;
-    //var lan = req.body.language
+app.post('/translate', (req, res) => { //Line 9
+    const axios = require("axios");
     console.log(req.body); 
-    axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=DE`,
+    var message = req.body.data;
+    var lan = req.body.lan
+    axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,
     {
         headers: {
             "Cache-Control": "no-cache",
@@ -32,6 +32,6 @@ app.post('/backend', (req, res) => { //Line 9
             console.log(error);
         }
     );
-}); //Line 11
+});
 
 

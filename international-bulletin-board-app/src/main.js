@@ -7,7 +7,7 @@ export default class Main extends Component{
 constructor() {
 	super();
 	this.state = {
-		data : "This is the backed and it works ",
+		data : "This dont work",
 		notes : [
 			'Today was a good day in Oregon',
 			'Saludos de Michoacan',
@@ -15,26 +15,22 @@ constructor() {
 		]
 	};
 }
+
 componentDidMount() {
+	this.setState({data : "The big red dog"});
     this.mydata()
       .then(res => this.setState({ data: res.message }))
       .catch(err => console.log(err));
   }
   
   mydata = async () => {
-
-	const response = await fetch('/backend', { method: 'POST',headers:{'Content-type':"application/json"}, body: JSON.stringify(this.state)});
+	const v1 = {data: document.getElementById("data").innerHTML, lan: "ES"};
+	let v2 = {data : v1}
+	console.log(v2);
+	const response = await fetch('/translate', { method: 'POST',headers:{'Content-type':"application/json"}, body: JSON.stringify(v1)
+});
 	const body = await response.json();
 	return body 
-	  /*
-    const response = await fetch('/backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-	*/
-    //return body;
   };
 	
 	render(){
@@ -57,7 +53,8 @@ componentDidMount() {
 				<button>New Note</button>
 				<button>View Random</button>
 			</footer>
-			<p id="data">data from backend is: {this.state.data}</p>
+			<p id="data">Hello I really like dogs (To Spanish)</p>
+			<p id="results">This is the translation to spanish:  {this.state.data}</p>
 		</div>
 
 	)
