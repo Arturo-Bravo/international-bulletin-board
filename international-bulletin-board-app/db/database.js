@@ -31,7 +31,7 @@ exports.createNoteTable = async function () {
               note_id INTEGER PRIMARY KEY,
               detected_language TEXT NOT NULL,
               note_color TEXT NOT NULL,
-              parent_note INTEGER DEFAULT NULL,
+              parent_note_id INTEGER DEFAULT NULL,
               message TEXT NOT NULL
           );`,
       (error) => {
@@ -82,7 +82,7 @@ exports.insertBoardNote = async function (
  * @param {String} detected_language The detected language of the message
  * @param {String} note_color The hex value for the note color
  * @param {String} message The note message
- * @param {Integer} parent_note The id of the note being replied to
+ * @param {Integer} parent_note_id The id of the note being replied to
  * @returns {Bool} true if insertion was successful,
  * otherwise throws an error message
  */
@@ -90,14 +90,14 @@ exports.insertReplyNote = async function (
   detected_language,
   note_color,
   message,
-  parent_note
+  parent_note_id
 ) {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     db.run(
-      `INSERT INTO notes(detected_language, note_color, message, parent_note)
+      `INSERT INTO notes(detected_language, note_color, message, parent_note_id)
           values(?, ?, ?, ?)`,
-      [detected_language, note_color, message, parent_note],
+      [detected_language, note_color, message, parent_note_id],
       (error) => {
         if (error) {
           reject(error.message);
@@ -114,7 +114,7 @@ exports.insertReplyNote = async function (
  * @async
  * @param {Integer} note_id The note id to be retrieved
  * @returns {Object} An object containing all note information
- * in the structure of {note_id, detected_language, note_color, message, parent_note}
+ * in the structure of {note_id, detected_language, note_color, message, parent_note_id}
  */
 exports.getNote = async function (note_id) {
   return new Promise((resolve, reject) => {
@@ -134,12 +134,12 @@ exports.getNote = async function (note_id) {
  * Retreives all notes that exist on the main board
  * @async
  * @returns {Array<Object>} An array of objects, each containing all note information
- * in the structure of {note_id, detected_language, note_color, message, parent_note}
+ * in the structure of {note_id, detected_language, note_color, message, parent_note_id}
  */
 exports.getBoardNotes = async function () {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
-    let query = `SELECT * FROM notes WHERE parent_note IS NULL`;
+    let query = `SELECT * FROM notes WHERE parent_note_id IS NULL`;
     db.all(query, [], (error, rows) => {
       if (error) {
         reject(error.message);
@@ -153,15 +153,15 @@ exports.getBoardNotes = async function () {
 /**
  * Retreives all notes that are replies to a specific note
  * @async
- * @param {Integer} parent_note The parent note id for which replies should be retrieved
+ * @param {Integer} parent_note_id The parent note id for which replies should be retrieved
  * @returns {Array<Object>} An array of objects, each containing all note information
  * in the structure of {note_id, detected_language, note_color, message, parent_note}
  */
-exports.getReplyNotes = async function (parent_note) {
+exports.getReplyNotes = async function (parent_note_id) {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
-    let query = `SELECT * FROM notes WHERE parent_note = ?`;
-    db.all(query, [parent_note], (error, rows) => {
+    let query = `SELECT * FROM notes WHERE parent_note_id = ?`;
+    db.all(query, [parent_note_id], (error, rows) => {
       if (error) {
         reject(error.message);
       }
