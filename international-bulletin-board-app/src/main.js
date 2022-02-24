@@ -1,6 +1,22 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import { useEffect } from "react";
+
+import NewNote from "./newNote";
+import App from "./App";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
+useEffect(() => {
+	let root = document.getElementById('root');
+	root.className='';
+
+	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
+}, [])
 
 	let notes = [
 		'Today was a good day in Oregon',
@@ -10,7 +26,7 @@ const Main = (argument1, argument2) => {
 
 	return(
 		<div>
-			<header>
+			<header >
 				<h1 className="my-2">Notes From Around the World</h1>
 			</header>
 			<div className="container-fluid">
@@ -23,9 +39,12 @@ const Main = (argument1, argument2) => {
 				</div>
 			</div>
 			<footer className="d-flex justify-content-around">
-				<button>New Note</button>
+				<a href="/new-note">
+					<button>New Note</button>
+				</a>
 				<button>View Random</button>
 			</footer>
+			
 		</div>
 
 	)
