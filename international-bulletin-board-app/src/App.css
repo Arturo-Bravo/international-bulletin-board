@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   height: 100vh;
 }
 
@@ -35,6 +34,7 @@ button {
 #noteForm {
   width: 100%;
   background-color: white;
+  border: 1px solid black;
 }
 
 #noteText {
@@ -49,4 +49,13 @@ button {
 
 #selectColor {
   color: rgb(48, 48, 48) !important;
+}
+
+footer + div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }

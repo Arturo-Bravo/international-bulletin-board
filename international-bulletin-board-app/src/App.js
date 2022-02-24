@@ -7,17 +7,12 @@ import {
   Link
 } from "react-router-dom";
 import NewNote from './newNote';
+import ViewNote from './viewNote';
 
 function App() {
   return (
     <div className="App">
-      
-      <Router>
-				<Routes>
-            <Route path="/" element={<Main/>} />
-						<Route path="/new-note" element={<NewNote/>}/>
-				</Routes>
-			</Router> 
+      <Main/> 
     </div>
   );
 }
