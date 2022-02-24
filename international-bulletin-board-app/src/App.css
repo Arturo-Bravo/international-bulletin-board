@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 #notesBox {
@@ -19,4 +20,33 @@ button {
   color: white !important;
   padding: 0.5em 1em;
   border: none;
+}
+
+.backdrop {
+  background-color: rgb(77, 75, 75);
+  height: 100vh;
+}
+
+#parentForm {
+  filter: none !important;
+  margin: auto;
+  height: 75%;
+}
+#noteForm {
+  width: 100%;
+  background-color: white;
+}
+
+#noteText {
+  max-height: 10em;
+  min-height: 5em;
+  width: 100%;
+}
+
+.select-color {
+  width: 50%;
+}
+
+#selectColor {
+  color: rgb(48, 48, 48) !important;
 }
