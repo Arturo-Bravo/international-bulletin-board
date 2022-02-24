@@ -19,6 +19,7 @@ function connectDatabase() {
 /**
  * Creates a table if one does not already exist for
  * note data
+ * @async
  * @returns {Bool} true if creation was successful,
  * otherwise throws an error message
  */
@@ -48,6 +49,7 @@ exports.createNoteTable = async function () {
 /**
  * Inserts data into the database for a
  * note on the main board
+ * @async
  * @param {String} detected_language The detected language of the message
  * @param {String} note_color The hex value for the note color
  * @param {String} message The note message
@@ -79,6 +81,7 @@ exports.insertBoardNote = async function (
 /**
  * Inserts data into the database for a
  * note that is a reply to another note
+ * @async
  * @param {String} detected_language The detected language of the message
  * @param {String} note_color The hex value for the note color
  * @param {String} message The note message
