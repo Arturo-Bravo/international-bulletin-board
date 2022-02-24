@@ -95,11 +95,25 @@ exports.getNote = async function (note_id) {
   });
 };
 
-exports.getNotes = async function () {
+exports.getBoardNotes = async function () {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
-    let query = `SELECT * FROM notes`;
+    let query = `SELECT * FROM notes WHERE parent_note IS NULL`;
     db.all(query, [], (error, rows) => {
+      if (error) {
+        reject(error.message);
+      }
+      resolve(rows);
+    });
+    db.close();
+  });
+};
+
+exports.getReplyNotes = async function (parent_note) {
+  return new Promise((resolve, reject) => {
+    let db = connectDatabase();
+    let query = `SELECT * FROM notes WHERE parent_note = ?`;
+    db.all(query, [parent_note], (error, rows) => {
       if (error) {
         reject(error.message);
       }
