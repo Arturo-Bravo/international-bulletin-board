@@ -12,7 +12,7 @@ function connectDatabase() {
 }
 
 // Create table
-function createNoteTable() {
+exports.createNoteTable = async function () {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     db.run(
@@ -33,10 +33,14 @@ function createNoteTable() {
     );
     db.close();
   });
-}
+};
 
 // Insert into table
-function insertBoardNote(detected_language, note_color, message) {
+exports.insertBoardNote = async function (
+  detected_language,
+  note_color,
+  message
+) {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     db.run(
@@ -52,9 +56,14 @@ function insertBoardNote(detected_language, note_color, message) {
     );
     db.close();
   });
-}
+};
 
-function insertReplyNote(detected_language, note_color, message, parent_note) {
+exports.insertReplyNote = async function (
+  detected_language,
+  note_color,
+  message,
+  parent_note
+) {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     db.run(
@@ -70,9 +79,9 @@ function insertReplyNote(detected_language, note_color, message, parent_note) {
     );
     db.close();
   });
-}
+};
 
-async function getNote(note_id) {
+exports.getNote = async function (note_id) {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     let query = `SELECT * FROM notes WHERE note_id = ?`;
@@ -84,9 +93,9 @@ async function getNote(note_id) {
     });
     db.close();
   });
-}
+};
 
-function getNotes() {
+exports.getNotes = async function () {
   return new Promise((resolve, reject) => {
     let db = connectDatabase();
     let query = `SELECT * FROM notes`;
@@ -98,18 +107,4 @@ function getNotes() {
     });
     db.close();
   });
-}
-
-// let db = connectDatabase();
-
-const printNote = async () => {
-  await createNoteTable();
-  await insertBoardNote("english", "ffffff", "this is the english message!");
-  await insertBoardNote("spanish", "000000", "donde esta la biblioteca?");
-  console.log(await getNotes());
-  await insertReplyNote("english", "ffffff", "this is the english message!", 1);
-  console.log(await getNotes());
-  console.log(await getNote(1));
-  // await db.close();
 };
-printNote();
