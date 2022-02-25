@@ -45,8 +45,8 @@ function NewNote()  {
 	};
 
 	return(
-		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10">
-			<div id="noteForm" className="p-4">
+		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75">
+			<div id="noteForm" className="p-4 col-12">
 				<h1>New Note</h1>
 				<form onSubmit={noteCreate} className="" >
 					<div className="form-group d-flex justify-content-between align-items-center">

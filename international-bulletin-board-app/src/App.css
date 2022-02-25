@@ -29,10 +29,8 @@ button {
 #parentForm {
   filter: none !important;
   margin: auto;
-  height: 75%;
 }
 #noteForm {
-  width: 100%;
   background-color: white;
   border: 1px solid black;
 }
