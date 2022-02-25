@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import {useNavigate, useLocation} from 'react-router-dom';
+import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import Select from 'react-select';
 
 function NewNote()  {
@@ -34,7 +34,6 @@ function NewNote()  {
 		let note = document.getElementById('noteForm');
 		note.style.backgroundColor = color.value;
 	}
-
 	
 	const navigate = useNavigate();
 
@@ -45,6 +44,7 @@ function NewNote()  {
 	};
 
 	return(
+		<div className="w-100 h-100 backdrop">
 		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75">
 			<div id="noteForm" className="p-4 col-12">
 				<h1>New Note</h1>
@@ -81,6 +81,7 @@ function NewNote()  {
 					<input type="submit" className="mt-4" value={'Submit'} />
 				</form>
 			</div>
+		</div>
 		</div>
 	)
 };

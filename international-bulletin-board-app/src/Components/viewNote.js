@@ -56,46 +56,51 @@ const ViewNote = () => {
 	//If it is replying
 	if(replyStatus === 1){
 		return(
-			<div className="d-flex align-items-center justify-content-around row px-2 h-75">
-				<div id="noteView" className="bg-success mb-2 p-5 col-md-5 col-10">
-					<h1> {note.text} </h1>
-					<p>Detected Language: Spanish?</p>
-					<div className="d-flex justify-content-between align-items-center">
-						<label htmlFor="language">Display Language: </label>
-						<Select  
-							id="selectColor"
-							options={langs}
-							className="select-color"
-							theme={(theme, state) => ({
-								...theme,
-								colors: {
-									...theme.colors,
-									primary25: "gray", //highlight
-									neutral0: "white",	//background color
-									neutral80:"black"	//selected text color
-								}
-							})}
-							onChange={langChange}
-						/>
+			<div className="h-100 w-100 backdrop">
+				<div className="d-flex align-items-center justify-content-around row px-2 h-75">
+					<div className="mb-2 col-md-5 col-10">
+						<div id="noteView" className="bg-success p-4">
+							<h1> {note.text} </h1>
+							<p>Detected Language: Spanish?</p>
+							<div className="d-flex justify-content-between align-items-center">
+								<label htmlFor="language">Display Language: </label>
+								<Select  
+									id="selectColor"
+									options={langs}
+									className="select-color"
+									theme={(theme, state) => ({
+										...theme,
+										colors: {
+											...theme.colors,
+											primary25: "gray", //highlight
+											neutral0: "white",	//background color
+											neutral80:"black"	//selected text color
+										}
+									})}
+									onChange={langChange}
+								/>
+							</div>
+
+							<p className="text-warning my-2">This is where the main body text will be. A note would have a title and body</p>
+
+							<div className="d-flex justify-content-between">
+								<button onClick={openReply}>Reply</button>
+								<button>View Replies(12)</button>
+							</div>
+						</div>
 					</div>
 
-					<p className="text-warning my-2">This is where the main body text will be. A note would have a title and body</p>
-
-					<div className="d-flex justify-content-between">
-						<button onClick={openReply}>Reply</button>
-						<button>View Replies(12)</button>
+					<div className="col-md-5 col-10">
+						<ReplyNote/>
 					</div>
 				</div>
-
-				<div className="col-md-5 col-12 col-10 md-mt-4">
-					<ReplyNote/>
-				</div>
-			</div>	
+			</div>
 		)
 	}
 
 
 	return(
+		<div className="backdrop h-100 w-100">
 		<div id="parentForm" className="d-flex align-items-center justify-content-start col-lg-6 col-md-8 col-10 h-75">
 			<div id="noteView" className="bg-success p-5">
 				<h1> {note.text} </h1>
@@ -127,6 +132,7 @@ const ViewNote = () => {
 				</div>
 				
 			</div>
+		</div>
 		</div>
 	);
 };

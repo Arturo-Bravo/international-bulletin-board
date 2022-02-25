@@ -1,5 +1,4 @@
 .App {
-  height: 100vh;
 }
 
 #notesBox {
@@ -22,8 +21,7 @@ button {
 }
 
 .backdrop {
-  background-color: rgb(77, 75, 75);
-  height: 100vh;
+  background-color: rgba(77, 75, 75, 0.384);
 }
 
 #parentForm {
