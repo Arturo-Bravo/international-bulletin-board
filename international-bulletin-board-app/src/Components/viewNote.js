@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Select from 'react-select';
+import ReplyNote from "./replyNote";
 
 const ViewNote = () => {
-	//const location = useLocation();
+
 	//normally here we would fetch a single note
+	const [replyStatus, setStatus] = useState(0);
+
+	useEffect(() => {
+
+	},[])
+
+	function openReply(){
+		setStatus(1);
+	}
+
+
 	let notes = [
 		{
 			text: 'Today was a good day in Oregon',
@@ -18,9 +31,8 @@ const ViewNote = () => {
 			id: '111111'
 		}
   ]
-	const location = useLocation();
-	console.log(location)
 
+	const location = useLocation();
 	let noteId = location.pathname.replace('/view-note/', '')
 	let note;
 	for(let i = 0; i<notes.length; i++){
@@ -69,9 +81,12 @@ const ViewNote = () => {
 				<p className="text-warning my-2">This is where the main body text will be. A note would have a title and body</p>
 
 				<div className="d-flex justify-content-between">
-					<button>Reply</button>
+					<button onClick={openReply}>Reply</button>
 					<button>View Replies(12)</button>
 				</div>
+				{(replyStatus === 1) &&
+					<ReplyNote/>
+				}
 			</div>
 		</div>
 	);

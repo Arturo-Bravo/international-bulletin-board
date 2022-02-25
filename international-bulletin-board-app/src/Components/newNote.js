@@ -3,9 +3,10 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import Select from 'react-select';
 
 function NewNote()  {
-	const location = useLocation();
-	let { fromMain } = location.state;
-	console.log(fromMain)
+
+	// const location = useLocation();
+	// let { fromMain } = location.state;
+	// console.log(fromMain)
 
 	useEffect(() => {
 
@@ -75,7 +76,6 @@ function NewNote()  {
 						name="text"
 						className="mt-2" 
 						id="noteText"
-						// value={this.noteText} for some reason this does not work idk why
 						onChange={(e) => setNote(e.target.value)}
 					></textarea>
 					<input type="submit" className="mt-4" value={'Submit'} />
