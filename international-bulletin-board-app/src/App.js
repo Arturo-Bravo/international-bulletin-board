@@ -6,8 +6,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import NewNote from './newNote';
-import ViewNote from './viewNote';
+import NewNote from './Components/newNote';
+import ViewNote from './Components/viewNote';
 
 function App() {
   return (

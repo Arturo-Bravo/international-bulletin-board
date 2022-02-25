@@ -6,8 +6,8 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 
-import NewNote from "./newNote";
-import ViewNote from "./viewNote";
+import NewNote from "./Components/newNote";
+import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
