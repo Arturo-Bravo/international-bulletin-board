@@ -28,6 +28,10 @@ button {
 #noteForm {
   background-color: white;
   border: 1px solid black;
+  position: relative;
+}
+#noteView {
+  position: relative;
 }
 
 #noteText {
@@ -45,10 +49,16 @@ button {
 }
 
 footer + div {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
 }

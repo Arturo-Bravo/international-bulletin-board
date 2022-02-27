@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import ReplyNote from "./replyNote";
+import CloseIcon from '@material-ui/icons/Close'
 
 const ViewNote = () => {
 
@@ -14,6 +15,11 @@ const ViewNote = () => {
 
 	function openReply(){
 		setStatus(1);
+	}
+
+	const navigate = useNavigate();
+	function closeBox(){
+		navigate('/');
 	}
 
 
@@ -60,6 +66,9 @@ const ViewNote = () => {
 				<div className="d-flex align-items-center justify-content-around row px-2 h-75">
 					<div className="mb-2 col-md-5 col-10">
 						<div id="noteView" className="bg-success p-4">
+							<button className="close" onClick={closeBox}>
+								<CloseIcon />
+							</button>
 							<h1> {note.text} </h1>
 							<p>Detected Language: Spanish?</p>
 							<div className="d-flex justify-content-between align-items-center">
@@ -91,7 +100,7 @@ const ViewNote = () => {
 					</div>
 
 					<div className="col-md-5 col-10">
-						<ReplyNote/>
+						<ReplyNote cancel={setStatus}/>
 					</div>
 				</div>
 			</div>
@@ -103,6 +112,9 @@ const ViewNote = () => {
 		<div className="backdrop h-100 w-100">
 		<div id="parentForm" className="d-flex align-items-center justify-content-start col-lg-6 col-md-8 col-10 h-75">
 			<div id="noteView" className="bg-success p-5">
+				<button className="close" onClick={closeBox}>
+					<CloseIcon />
+				</button>
 				<h1> {note.text} </h1>
 				<p>Detected Language: Spanish?</p>
 				<div className="d-flex justify-content-between align-items-center">

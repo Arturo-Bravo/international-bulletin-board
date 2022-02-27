@@ -1,13 +1,5 @@
 import './App.css';
 import Main from './main.js'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-import NewNote from './Components/newNote';
-import ViewNote from './Components/viewNote';
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import Select from 'react-select';
+import CloseIcon from '@material-ui/icons/Close'
 
 function NewNote()  {
 
@@ -36,7 +37,9 @@ function NewNote()  {
 	}
 	
 	const navigate = useNavigate();
-
+	function closeBox(){
+		navigate('/');
+	}
 	const noteCreate = (event) => {
 		event.preventDefault();
 		console.log(noteText);
@@ -47,6 +50,9 @@ function NewNote()  {
 		<div className="w-100 h-100 backdrop">
 		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75">
 			<div id="noteForm" className="p-4 col-12">
+				<button className="close" onClick={closeBox}>
+					<CloseIcon />
+				</button>
 				<h1>New Note</h1>
 				<form onSubmit={noteCreate} className="" >
 					<div className="form-group d-flex justify-content-between align-items-center">

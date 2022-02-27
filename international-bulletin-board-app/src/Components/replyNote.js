@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from 'react-select';
 
-const ReplyNote = () => {
+const ReplyNote = ({cancel}) => {
 	//This is gonna need to handle stuff different than the NewNote component
 	useEffect(() => {
 
@@ -68,7 +68,10 @@ const ReplyNote = () => {
 						id="noteText"
 						onChange={(e) => setNote(e.target.value)}
 					></textarea>
-					<input type="submit" className="mt-4" value={'Submit'} />
+					<div className="d-flex justify-content-between">
+						<input type="submit" className="mt-4" value={'Submit'} />
+						<button onClick={()=>{cancel(0)}}>Cancel</button>
+					</div>
 				</form>
 			</div>
 		</div>
