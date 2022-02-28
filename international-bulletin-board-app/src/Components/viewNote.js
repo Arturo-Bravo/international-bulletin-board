@@ -62,10 +62,10 @@ const ViewNote = () => {
 	//If it is replying
 	if(replyStatus === 1){
 		return(
-			<div className="h-100 w-100 backdrop">
+			<div className="h-100 w-100 backdrop d-flex justify-content-center">
 				<div className="d-flex align-items-center justify-content-around row h-75 w-100">
-					<div className="mb-2 col-md-5 col-10 slide-in-right">
-						<div id="noteView" className="bg-success p-4">
+					<div className="mb-2 col-md-5 col-10">
+						<div id="noteView" className="bg-success p-4 slide-center">
 							<button className="close" onClick={closeBox}>
 								<CloseIcon />
 							</button>
@@ -99,7 +99,7 @@ const ViewNote = () => {
 						</div>
 					</div>
 
-					<div className="col-md-5 col-10">
+					<div className="col-md-5 col-10 slide-right">
 						<ReplyNote cancel={setStatus}/>
 					</div>
 				</div>
