@@ -63,8 +63,8 @@ const ViewNote = () => {
 	if(replyStatus === 1){
 		return(
 			<div className="h-100 w-100 backdrop">
-				<div className="d-flex align-items-center justify-content-around row px-2 h-75">
-					<div className="mb-2 col-md-5 col-10">
+				<div className="d-flex align-items-center justify-content-around row h-75 w-100">
+					<div className="mb-2 col-md-5 col-10 slide-in-right">
 						<div id="noteView" className="bg-success p-4">
 							<button className="close" onClick={closeBox}>
 								<CloseIcon />
