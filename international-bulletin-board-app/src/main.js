@@ -6,19 +6,17 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 
-import NewNote from "./newNote";
-import ViewNote from "./viewNote";
+import NewNote from "./Components/newNote";
+import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
 	let change = 0;
 
-useEffect(() => {
-	let root = document.getElementById('root');
-	root.className='';
+	useEffect(() => {
 
 	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-}, [change])
+	}, [change])
 
 	let notes = [
 		{
@@ -59,7 +57,7 @@ useEffect(() => {
 			<footer className="d-flex justify-content-around">
 				<Link 
 					to={ '/new-note' }
-					state={{ fromMain: change }}
+					// state={{ fromMain: change }}
 				>
 					<button>New Note</button>
 				</Link>

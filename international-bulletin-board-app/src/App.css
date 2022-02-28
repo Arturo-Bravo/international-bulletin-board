@@ -1,7 +1,3 @@
-.App {
-  height: 100vh;
-}
-
 #notesBox {
   height: 75vh;
 }
@@ -22,19 +18,20 @@ button {
 }
 
 .backdrop {
-  background-color: rgb(77, 75, 75);
-  height: 100vh;
+  background-color: rgba(77, 75, 75, 0.384);
 }
 
 #parentForm {
   filter: none !important;
   margin: auto;
-  height: 75%;
 }
 #noteForm {
-  width: 100%;
   background-color: white;
   border: 1px solid black;
+  position: relative;
+}
+#noteView {
+  position: relative;
 }
 
 #noteText {
@@ -58,4 +55,10 @@ footer + div {
   right: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
 }

@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import {useNavigate, useLocation} from 'react-router-dom';
+import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import Select from 'react-select';
+import CloseIcon from '@material-ui/icons/Close'
 
 function NewNote()  {
-	const location = useLocation();
-	let { fromMain } = location.state;
-	console.log(fromMain)
+
+	// const location = useLocation();
+	// let { fromMain } = location.state;
+	// console.log(fromMain)
 
 	useEffect(() => {
 
@@ -33,10 +35,11 @@ function NewNote()  {
 		let note = document.getElementById('noteForm');
 		note.style.backgroundColor = color.value;
 	}
-
 	
 	const navigate = useNavigate();
-
+	function closeBox(){
+		navigate('/');
+	}
 	const noteCreate = (event) => {
 		event.preventDefault();
 		console.log(noteText);
@@ -44,8 +47,12 @@ function NewNote()  {
 	};
 
 	return(
-		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10">
-			<div id="noteForm" className="p-4">
+		<div className="w-100 h-100 backdrop">
+		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75">
+			<div id="noteForm" className="p-4 col-12">
+				<button className="close" onClick={closeBox}>
+					<CloseIcon />
+				</button>
 				<h1>New Note</h1>
 				<form onSubmit={noteCreate} className="" >
 					<div className="form-group d-flex justify-content-between align-items-center">
@@ -75,12 +82,12 @@ function NewNote()  {
 						name="text"
 						className="mt-2" 
 						id="noteText"
-						// value={this.noteText} for some reason this does not work idk why
 						onChange={(e) => setNote(e.target.value)}
 					></textarea>
 					<input type="submit" className="mt-4" value={'Submit'} />
 				</form>
 			</div>
+		</div>
 		</div>
 	)
 };
