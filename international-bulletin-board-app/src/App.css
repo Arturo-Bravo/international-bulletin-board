@@ -63,30 +63,32 @@ footer + div {
   right: -10px;
 }
 
-.slide-right {
-  animation: slide 0.5s;
-  position: relative;
-}
-
-@keyframes slide {
-  0% {
-    transform: translate(100vw);
+@media (min-width: 768px) {
+  .slide-right {
+    animation: slide 0.5s;
+    position: relative;
   }
-  100% {
-    transform: translate(0);
-  }
-}
 
-.slide-center {
-  position: relative;
-  animation: center-slide 0.5s;
-}
-
-@keyframes center-slide {
-  0% {
-    transform: translate(50%);
+  @keyframes slide {
+    0% {
+      transform: translate(100vw);
+    }
+    100% {
+      transform: translate(0);
+    }
   }
-  100% {
-    transform: translate(0);
+
+  .slide-center {
+    position: relative;
+    animation: center-slide 0.5s;
+  }
+
+  @keyframes center-slide {
+    0% {
+      transform: translate(50%);
+    }
+    100% {
+      transform: translate(0);
+    }
   }
 }
