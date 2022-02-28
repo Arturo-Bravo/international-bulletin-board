@@ -15,6 +15,20 @@ app.post('/translate', (req, res) => { //Line 9
     console.log(req.body); 
     var message = req.body.data;
     var lan = req.body.lan
+    const translate = require("deepl");
+    const key = "958e4684-90e8-4a43-869b-c5a5fed4980c:fx"
+    translate({
+        text: message,
+        target_lang: lan,
+        auth_key: key,
+    // All optional parameters available in the official documentation can be defined here as well.
+    })
+    .then(response => {
+        console.log(response.data.translations[0].text, "response");
+        res.send({message: response.data.translations[0].text})
+    })
+});
+/*
     axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,
     {
         headers: {
@@ -32,6 +46,4 @@ app.post('/translate', (req, res) => { //Line 9
             console.log(error);
         }
     );
-});
-
-
+*/
