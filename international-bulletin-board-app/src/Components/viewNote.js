@@ -153,7 +153,7 @@ const ViewNote = () => {
           </div>
 
           <div className="col-md-5 col-10 slide-right">
-            <ReplyHolder parent_note={noteId} cancel={setStatus} />
+            <ReplyHolder parent_note={noteId} setStatus={setStatus} />
           </div>
         </div>
       </div>

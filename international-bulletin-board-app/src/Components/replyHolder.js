@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import ViewReplies from "./viewReplies";
-import CloseIcon from "@material-ui/icons/Close";
 import { KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 
-const ReplyHolder = ({ parent_note, cancel }) => {
+const ReplyHolder = ({ parent_note, setStatus }) => {
   const [replyToView, setReply] = useState(0);
 
   useEffect(() => {}, []);
@@ -17,10 +15,9 @@ const ReplyHolder = ({ parent_note, cancel }) => {
     setReply(replyToView + 1);
   }
 
-  const navigate = useNavigate();
-
   // This would be fetched notes with the passed down parent id
   // notes = fetch(parent_note) or something
+
   let notes = [
     {
       text: "Today was a good day in Oregon",
@@ -36,16 +33,6 @@ const ReplyHolder = ({ parent_note, cancel }) => {
     },
   ];
 
-  const location = useLocation();
-  let noteId = location.pathname.replace("/view-note/", "");
-  //   let note;
-  //   for (let i = 0; i < notes.length; i++) {
-  //     if (notes[i].id === noteId) {
-  //       note = notes[i];
-  //       break;
-  //     }
-  //   }
-
   return (
     <div
       id="replyViewer"
@@ -57,7 +44,11 @@ const ReplyHolder = ({ parent_note, cancel }) => {
             <KeyboardArrowUp />
           </button>
         )}
-        <ViewReplies note={notes[replyToView]} cancel={cancel} />
+        <ViewReplies
+          note={notes[replyToView]}
+          setStatus={setStatus}
+          viewRepliesClick={setReply}
+        />
         {replyToView !== notes.length - 1 && (
           <button className="nextReply" onClick={nextReply}>
             <KeyboardArrowDown />
