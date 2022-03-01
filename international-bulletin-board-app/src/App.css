@@ -63,6 +63,18 @@ footer + div {
   right: -10px;
 }
 
+.prevReply {
+  position: absolute;
+  top: -5%;
+  right: 50%;
+}
+
+.nextReply {
+  position: absolute;
+  top: 95%;
+  right: 50%;
+}
+
 .slide-right {
   animation: slide 0.5s;
   position: relative;
