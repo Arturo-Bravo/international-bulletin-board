@@ -39,6 +39,8 @@ const ReplyHolder = ({ parent_note }) => {
     },
   ];
 
+  console.log(notes.length);
+
   const location = useLocation();
   let noteId = location.pathname.replace("/view-note/", "");
   //   let note;
@@ -65,7 +67,7 @@ const ReplyHolder = ({ parent_note }) => {
             <CloseIcon />
           </button>
           <ViewReplies note={notes[replyToView]} />
-          {replyToView !== notes.length && (
+          {replyToView !== notes.length - 1 && (
             <button className="nextReply" onClick={nextReply}>
               <KeyboardArrowDown />
             </button>
