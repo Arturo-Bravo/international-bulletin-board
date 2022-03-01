@@ -54,10 +54,9 @@ const Main = (argument1, argument2) => {
 	let lowerLimit = 0 + (vw*.20)
 	for(let i=0; i< notes.length; i++){
 		x = Math.random() * (upperLimit - lowerLimit) + lowerLimit;
-		y = range[i] * 10;
+		y = (range[i] * 25) + 100;
 		rngesus.push({x, y})
 	}
-	console.log(rngesus)
 
 	function randomRoute(){
 		setRandom(Math.floor(Math.random() * notes.length))
@@ -79,7 +78,13 @@ const Main = (argument1, argument2) => {
 								}}
 								key={index}
 							>
-								<div className="note m-2 shadow p-2"> {note.text} </div>
+								<div className="note m-2 shadow p-2"
+									style={{
+										position: "absolute",
+										left: `${rngesus[index].x}px`,
+										top: `${rngesus[index].y}px`
+									}}
+								> {note.text} </div>
 							</Link>
 						))}
 					</div>
