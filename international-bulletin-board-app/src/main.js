@@ -12,6 +12,9 @@ import ViewNote from "./Components/viewNote";
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
 
+	//view width dimensions https://stackoverflow.com/a/8876069
+	const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
 	const [randomIndex, setRandom] = useState(0);
 	useEffect(() => {
 		setRandom(Math.floor(Math.random() * notes.length))	
@@ -33,6 +36,28 @@ const Main = (argument1, argument2) => {
 			id: '111111'
 		}
   ]
+
+	let rngesus = [];
+	//generate range of notes
+	let range = [...notes.keys()];
+	//Durstenfeld shuffle https://stackoverflow.com/a/12646864
+	function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+	}
+	shuffleArray(range);
+	let x = 0;
+	let y = 0;
+	let upperLimit = vw - (vw*.20)
+	let lowerLimit = 0 + (vw*.20)
+	for(let i=0; i< notes.length; i++){
+		x = Math.random() * (upperLimit - lowerLimit) + lowerLimit;
+		y = range[i] * 10;
+		rngesus.push({x, y})
+	}
+	console.log(rngesus)
 
 	function randomRoute(){
 		setRandom(Math.floor(Math.random() * notes.length))
