@@ -36,8 +36,6 @@ const ReplyHolder = ({ parent_note, cancel }) => {
     },
   ];
 
-  console.log(notes.length);
-
   const location = useLocation();
   let noteId = location.pathname.replace("/view-note/", "");
   //   let note;

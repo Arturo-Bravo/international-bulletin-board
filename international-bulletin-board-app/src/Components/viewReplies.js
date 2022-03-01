@@ -15,13 +15,13 @@ const ViewReplies = ({ note, cancel }) => {
     setStatus(1);
   }
 
-  function viewReplies() {
-    setStatus(2);
-  }
-
   const navigate = useNavigate();
   function closeBox() {
     navigate("/");
+  }
+
+  function viewReplies() {
+    navigate(`/view-note/${note.id}`, { state: 0 });
   }
 
   // 	let notes = [
