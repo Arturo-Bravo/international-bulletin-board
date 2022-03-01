@@ -50,12 +50,12 @@ const Main = (argument1, argument2) => {
 	shuffleArray(range);
 	let x = 0;
 	let y = 0;
-	let upperLimit = vw - (vw*.20)
-	let lowerLimit = 0 + (vw*.20)
+	let upperLimit = 0.90
+	let lowerLimit = 0.10
 	for(let i=0; i< notes.length; i++){
-		x = Math.random() * (upperLimit - lowerLimit) + lowerLimit;
-		y = (range[i] * 25) + 100;
-		rngesus.push({x, y})
+		x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
+		y = range[i] * 25;
+		rngesus.push({x, y});
 	}
 
 	function randomRoute(){
@@ -70,7 +70,7 @@ const Main = (argument1, argument2) => {
 			<Router>
 			<div className="container-fluid">
 				<div id="notesBox" className="row justify-content-center">
-					<div className="col-10">
+					<div id="board" className="col-10">
 						{notes.map((note, index) => (
 							<Link 
 								to={{
@@ -78,10 +78,10 @@ const Main = (argument1, argument2) => {
 								}}
 								key={index}
 							>
-								<div className="note m-2 shadow p-2"
+								<div className="note m-2 p-2"
 									style={{
-										position: "absolute",
-										left: `${rngesus[index].x}px`,
+										position: "relative",
+										left: `${rngesus[index].x}%`,
 										top: `${rngesus[index].y}px`
 									}}
 								> {note.text} </div>
@@ -90,7 +90,7 @@ const Main = (argument1, argument2) => {
 					</div>
 				</div>
 			</div>
-			<footer className="d-flex justify-content-around">
+			<footer className="d-flex justify-content-around mt-2">
 				<Link 
 					to={ '/new-note' }
 					// state={{ fromMain: change }}
