@@ -4,7 +4,7 @@ import ViewReplies from "./viewReplies";
 import CloseIcon from "@material-ui/icons/Close";
 import { KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 
-const ReplyHolder = ({ parent_note }) => {
+const ReplyHolder = ({ parent_note, cancel }) => {
   const [replyToView, setReply] = useState(0);
 
   useEffect(() => {}, []);
@@ -18,12 +18,9 @@ const ReplyHolder = ({ parent_note }) => {
   }
 
   const navigate = useNavigate();
-  function closeBox() {
-    navigate("/");
-  }
 
   // This would be fetched notes with the passed down parent id
-  // notes = fetch(parent_id) or something
+  // notes = fetch(parent_note) or something
   let notes = [
     {
       text: "Today was a good day in Oregon",
@@ -52,27 +49,22 @@ const ReplyHolder = ({ parent_note }) => {
   //   }
 
   return (
-    <div className="backdrop h-100 w-100">
-      <div
-        id="replyViewer"
-        className="d-flex align-items-center justify-content-start"
-      >
-        <div id="replyNavigation">
-          {replyToView !== 0 && (
-            <button className="prevReply" onClick={prevReply}>
-              <KeyboardArrowUp />
-            </button>
-          )}
-          <button className="close" onClick={closeBox}>
-            <CloseIcon />
+    <div
+      id="replyViewer"
+      className="d-flex align-items-center justify-content-start"
+    >
+      <div id="replyNavigation">
+        {replyToView !== 0 && (
+          <button className="prevReply" onClick={prevReply}>
+            <KeyboardArrowUp />
           </button>
-          <ViewReplies note={notes[replyToView]} />
-          {replyToView !== notes.length - 1 && (
-            <button className="nextReply" onClick={nextReply}>
-              <KeyboardArrowDown />
-            </button>
-          )}
-        </div>
+        )}
+        <ViewReplies note={notes[replyToView]} cancel={cancel} />
+        {replyToView !== notes.length - 1 && (
+          <button className="nextReply" onClick={nextReply}>
+            <KeyboardArrowDown />
+          </button>
+        )}
       </div>
     </div>
   );

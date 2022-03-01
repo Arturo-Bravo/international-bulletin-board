@@ -5,7 +5,7 @@ import ReplyNote from "./replyNote";
 import CloseIcon from "@material-ui/icons/Close";
 import ReplyHolder from "./replyHolder";
 
-const ViewReplies = ({ note }) => {
+const ViewReplies = ({ note, cancel }) => {
   //normally here we would fetch a single note
   const [replyStatus, setStatus] = useState(0);
 
@@ -163,10 +163,15 @@ const ViewReplies = ({ note }) => {
   return (
     <div
       id="parentForm"
-      className="d-flex align-items-center justify-content-start col-lg-6 col-md-8 col-10 h-75"
+      className="d-flex align-items-center justify-content-start h-75"
     >
-      <div id="noteView" className="bg-success p-5">
-        <button className="close" onClick={closeBox}>
+      <div id="repliesView" className="bg-success p-5">
+        <button
+          className="close"
+          onClick={() => {
+            cancel(0);
+          }}
+        >
           <CloseIcon />
         </button>
         <h1> {note.text} </h1>
@@ -197,7 +202,7 @@ const ViewReplies = ({ note }) => {
 
         <div className="d-flex justify-content-between">
           <button onClick={openReply}>Reply</button>
-          <button>View Replies(12)</button>
+          <button onClick={viewReplies}>View Replies(12)</button>
         </div>
       </div>
     </div>

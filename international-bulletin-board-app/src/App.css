@@ -40,6 +40,11 @@ button {
   width: 100%;
 }
 
+#repliesView {
+  position: relative;
+  width: 100%;
+}
+
 .select-color {
   width: 50%;
 }
@@ -67,12 +72,14 @@ footer + div {
   position: absolute;
   top: -5%;
   right: 50%;
+  z-index: 5;
 }
 
 .nextReply {
   position: absolute;
   top: 95%;
   right: 50%;
+  z-index: 5;
 }
 
 .slide-right {
