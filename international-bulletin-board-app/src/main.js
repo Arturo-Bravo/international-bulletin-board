@@ -4,19 +4,20 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
-	let change = 0;
 
+	const [randomIndex, setRandom] = useState(0);
 	useEffect(() => {
+		setRandom(Math.floor(Math.random() * notes.length))	
 
 	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-	}, [change])
+	})
 
 	let notes = [
 		{
@@ -33,6 +34,10 @@ const Main = (argument1, argument2) => {
 		}
   ]
 
+	function randomRoute(){
+		setRandom(Math.floor(Math.random() * notes.length))
+	}
+
 	return(
 		<div>
 			<header >
@@ -47,6 +52,7 @@ const Main = (argument1, argument2) => {
 								to={{
 									pathname:`/view-note/${note.id}`, 
 								}}
+								key={index}
 							>
 								<div className="note m-2 shadow p-2"> {note.text} </div>
 							</Link>
@@ -61,7 +67,13 @@ const Main = (argument1, argument2) => {
 				>
 					<button>New Note</button>
 				</Link>
-				<button>View Random</button>
+				{
+				<Link
+					to={ `/view-note/${notes[randomIndex].id}` }
+				>
+				<button onClick={randomRoute}>View Random</button>
+				</Link>
+				}
 			</footer>
 			
 			
