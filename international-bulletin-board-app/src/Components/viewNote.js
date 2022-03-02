@@ -6,14 +6,15 @@ import ReplyHolder from "./replyHolder";
 import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
-  //normally here we would fetch a single note
-  const [replyStatus, setStatus] = useState(0);
+  const [note, setNote] = useState({});
   const [replyCount, setReplyCount] = useState(0);
+  const [replyStatus, setStatus] = useState(0);
   const location = useLocation();
 
   let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
+    getNote();
     fetchReplyNoteCount(noteId);
   }, [noteId]);
 
@@ -30,6 +31,14 @@ const ViewNote = () => {
     navigate("/");
   }
 
+  async function getNote() {
+    const response = await fetch(`/getnote?note_id=${noteId}`, {
+      method: "GET",
+    });
+    const body = await response.json();
+    setNote(body);
+  }
+
   async function fetchReplyNoteCount(parent_note) {
     const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
       method: "GET",
@@ -39,33 +48,6 @@ const ViewNote = () => {
     }
     const data = await response.json();
     setReplyCount(data.count);
-  }
-
-  let notes = [
-    {
-      text: "Today was a good day in Oregon",
-      id: "1",
-    },
-    {
-      text: "Saludos de Michoacan",
-      id: "2",
-    },
-    {
-      text: "Сегодня моя машина взорвалась",
-      id: "3",
-    },
-    {
-      text: "reply number 1",
-      id: "4",
-    },
-  ];
-
-  let note;
-  for (let i = 0; i < notes.length; i++) {
-    if (notes[i].id === noteId) {
-      note = notes[i];
-      break;
-    }
   }
 
   const langs = [
@@ -79,17 +61,18 @@ const ViewNote = () => {
     //can access option.value and option.label
     //value should be the one we need for the argument to pass to DeepL
   };
+
   //If it is replying
   if (replyStatus === 1) {
     return (
-      <div className="h-100 w-100 backdrop d-flex justify-content-center">
+      <div className="h-100 w-100 backdrop">
         <div className="d-flex align-items-center justify-content-around row h-75 w-100">
-          <div className="mb-2 col-md-5 col-10">
-            <div id="noteView" className="bg-success p-4 slide-center">
+          <div className="mb-2 col-md-5 col-10 slide-in-right">
+            <div id="noteView" className="bg-success p-4">
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.text} </h1>
+              <h1> {note.message} </h1>
               <p>Detected Language: Spanish?</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -142,7 +125,7 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.text} </h1>
+              <h1> {note.message} </h1>
               <p>Detected Language: Spanish?</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -197,7 +180,7 @@ const ViewNote = () => {
           <button className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
-          <h1> {note.text} </h1>
+          <h1> {note.message} </h1>
           <p>Detected Language: Spanish?</p>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>

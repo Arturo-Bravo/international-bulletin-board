@@ -1,17 +1,19 @@
-const express = require("express"); //Line 1
+const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express(); //Line 2
-const port = process.env.PORT || 6000; //Line 3
+const app = express(); 
+const port = process.env.PORT || 6000;
 const db = require("../db/database");
 
 app.use(cors());
 app.use(bodyParser.json());
-app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
 
-// create a GET route
+app.listen(port, async () => {
+  console.log(`Listening on port ${port}`);
+  await db.createNoteTable();
+});
+
 app.post("/translate", (req, res) => {
-  //Line 9
   const axios = require("axios");
   console.log(req.body);
   var message = req.body.data;
@@ -22,11 +24,36 @@ app.post("/translate", (req, res) => {
     text: message,
     target_lang: lan,
     auth_key: key,
-    // All optional parameters available in the official documentation can be defined here as well.
   }).then((response) => {
     console.log(response.data.translations[0].text, "response");
     res.send({ message: response.data.translations[0].text });
   });
+});
+app.get("/getnote", async (req, res) => {
+  let note_id = req.query.note_id;
+  try {
+    const data = await db.getNote(note_id);
+    res.send(data);
+  } catch (error) {
+    console.error(`Error feteching reply notes from database: ${error}`);
+  }
+});
+
+app.get("/getall", async (req, res) => {
+  const data = await db.getBoardNotes();
+  console.log("This is the data", data);
+  res.send(data);
+});
+
+app.post("/savenote", async (req, res) => {
+  const axios = require("axios");
+  let message = req.body.data;
+  let lan = req.body.lan;
+  let color = req.body.color;
+  await db.insertBoardNote(lan, color, message);
+  const results = await db.getBoardNotes();
+  console.log(results);
+  res.send("Success");
 });
 
 app.get("/getreplies", async (req, res) => {

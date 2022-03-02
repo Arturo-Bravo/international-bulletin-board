@@ -1,37 +1,28 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
-  //view width dimensions https://stackoverflow.com/a/8876069
+  const [randomIndex, setRandom] = useState(0);
+  const [notes, setNotes] = useState([]);
+  useEffect(() => {
+    allNotes();
+    //setRandom(Math.floor(Math.random() * notes.length))
+  }, []);
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
   );
 
-  const [randomIndex, setRandom] = useState(0);
-  useEffect(() => {
-    setRandom(Math.floor(Math.random() * notes.length));
-
-    //THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-  });
-
-  let notes = [
-    {
-      text: "Today was a good day in Oregon",
-      id: "1",
-    },
-    {
-      text: "Saludos de Michoacan",
-      id: "2",
-    },
-    {
-      text: "Сегодня моя машина взорвалась",
-      id: "3",
-    },
-  ];
+  async function allNotes() {
+    const response = await fetch("/getall", {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+    });
+    const body = await response.json();
+    setNotes(body);
+  }
 
   let rngesus = [];
   //generate range of notes
@@ -57,7 +48,6 @@ const Main = (argument1, argument2) => {
   function randomRoute() {
     setRandom(Math.floor(Math.random() * notes.length));
   }
-
   return (
     <div>
       <header>
@@ -70,7 +60,7 @@ const Main = (argument1, argument2) => {
               {notes.map((note, index) => (
                 <Link
                   to={{
-                    pathname: `/view-note/${note.id}`,
+                    pathname: `/view-note/${note.note_id}`,
                   }}
                   key={index}
                 >
@@ -82,8 +72,7 @@ const Main = (argument1, argument2) => {
                       top: `${rngesus[index].y}px`,
                     }}
                   >
-                    {" "}
-                    {note.text}{" "}
+                    {note.message}
                   </div>
                 </Link>
               ))}
@@ -98,12 +87,11 @@ const Main = (argument1, argument2) => {
             <button>New Note</button>
           </Link>
           {
-            <Link to={`/view-note/${notes[randomIndex].id}`}>
+            <Link to={`/view-note/`}>
               <button onClick={randomRoute}>View Random</button>
             </Link>
           }
         </footer>
-
         <Routes>
           <Route path="/new-note" element={<NewNote />} />
           <Route path="/view-note/:noteId" element={<ViewNote />} />
