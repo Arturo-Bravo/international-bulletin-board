@@ -16,7 +16,15 @@ function NewNote()  {
 	//Form variables
 	const [noteText, setNote] = useState("");
 	//const [selectedColor, setColor] = useState([])
-
+	async function newNote() {
+		let v1 = { data: noteText, color: document.getElementById("selectColor").innerText, lan: "spanish" };
+		console.log(v1);
+		const response = await fetch("/savenote", {
+		  method: "POST",
+		  headers: { "Content-type": "application/json" },
+		  body: JSON.stringify(v1),
+		});
+	  }
 	//Set Colors here in value
 	const options = [
 		{ value: '#feff9c', label: 'Yellow'},
@@ -42,8 +50,11 @@ function NewNote()  {
 	}
 	const noteCreate = (event) => {
 		event.preventDefault();
-		console.log(noteText);
+		newNote();
+		console.log(document.getElementById("selectColor").innerText)
+		console.log("This is the note text ",noteText);
 		navigate('/');
+		window.location.reload();
 	};
 
 	return(

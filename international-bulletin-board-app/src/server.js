@@ -35,8 +35,8 @@ app.post("/getnote", async (req, res) => {
   //Line 9
   console.log(req.body);
   let note_id = req.body.note_id;
-  await db.insertBoardNote("English", "Red", "Hello"); // Just to make sure there is always a note to retrieve
-  await db.insertBoardNote("spanish", "green", "I really like dogs");
+  //await db.insertBoardNote("English", "Red", "Hello"); // Just to make sure there is always a note to retrieve
+  //await db.insertBoardNote("spanish", "green", "I really like dogs");
   const data = await db.getNote(note_id);
   res.send(data);
 });
@@ -48,15 +48,18 @@ app.get("/getall", async (req, res) => {
 });
 
 app.post("/savenote", async (req, res) => {
-  //Line 9
   const axios = require("axios");
   console.log(req.body);
-  var message = req.body.data;
-  var lan = req.body.lan;
+  let message = req.body.data;
+  let lan = req.body.lan;
+  let color = req.body.color;
+  /*
   await db.insertBoardNote("English", "Red", "Hello");
   await db.insertBoardNote("spanish", "green", "I really like dogs");
   await db.insertBoardNote("German", "blue", "Lets go home");
+  */
+  await db.insertBoardNote(lan, color, message);
   const results = await db.getBoardNotes();
   console.log(results);
-  res.send(results);
+  res.send("Success");
 });

@@ -9,18 +9,12 @@ import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
-//We can pass data through components like so
-	//const [replyStatus, setStatus] = useState(0);
-	const [notes, setNotes] = useState({});
+	const [notes, setNotes] = useState([]);
 	useEffect(() => {
 		allNotes();
-	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-	}, [])
+	}, []);
 
 	async function allNotes() {
-		//const v1 = { note_id: noteId };
-		//let v2 = { data: v1 };
-		//console.log(v2);
 		const response = await fetch("/getall", {
 		  method: "GET",
 		  headers: { "Content-type": "application/json" }
@@ -30,24 +24,6 @@ const Main = (argument1, argument2) => {
 		// return body;
 		setNotes(body);
 	  }
-	//replace with actual database 
-	/*
-	let notes = [
-		{
-			text: 'Today was a good day in Oregon',
-			id: '1'
-			//color: 'red'
-		},
-		{
-			text: 'Saludos de Michoacan',
-			id: '999999'
-		},
-		{
-			text: 'Сегодня моя машина взорвалась',
-			id: '111111'
-		}
-  ]
-*/
 
 	return(
 		<div>
