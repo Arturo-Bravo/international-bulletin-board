@@ -29,11 +29,14 @@ app.post("/translate", (req, res) => {
     res.send({ message: response.data.translations[0].text });
   });
 });
-app.post("/getnote", async (req, res) => {
-  console.log(req.body);
-  let note_id = req.body.note_id;
-  const data = await db.getNote(note_id);
-  res.send(data);
+app.get("/getnote", async (req, res) => {
+  let note_id = req.query.note_id;
+  try {
+    const data = await db.getNote(note_id);
+    res.send(data);
+  } catch (error) {
+    console.error(`Error feteching reply notes from database: ${error}`);
+  }
 });
 
 app.get("/getall", async (req, res) => {
@@ -44,7 +47,6 @@ app.get("/getall", async (req, res) => {
 
 app.post("/savenote", async (req, res) => {
   const axios = require("axios");
-  console.log(req.body);
   let message = req.body.data;
   let lan = req.body.lan;
   let color = req.body.color;
