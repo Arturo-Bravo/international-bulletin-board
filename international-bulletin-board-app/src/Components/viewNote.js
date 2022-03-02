@@ -32,17 +32,13 @@ const ViewNote = () => {
   }
 
   async function getNote() {
-    const v1 = { note_id: noteId };
-    let v2 = { data: v1 };
-    console.log(v2);
     const response = await fetch(`/getnote?note_id=${noteId}`, {
-      method: "GET"
+      method: "GET",
     });
     const body = await response.json();
-    console.log(body);
-    // return body;
     setNote(body);
   }
+
   async function fetchReplyNoteCount(parent_note) {
     const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
       method: "GET",
