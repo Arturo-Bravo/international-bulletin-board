@@ -41,11 +41,7 @@ app.post("/getnote", async (req, res) => {
   res.send(data);
 });
 
-app.get("/getnotes", async (req, res) => {
-  //Line 9
-  console.log(req.body);
-  var message = req.body.data;
-  var lan = req.body.lan;
+app.get("/getall", async (req, res) => {
   const data = await db.getBoardNotes();
   console.log(data);
   res.send(data);

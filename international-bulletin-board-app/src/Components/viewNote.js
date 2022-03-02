@@ -21,9 +21,11 @@ const ViewNote = () => {
     navigate("/");
   }
 
-  //change to actual database
+  const location = useLocation();
+  let noteId = location.pathname.replace("/view-note/", "");
+  
   async function mydata() {
-    const v1 = { note_id: 1 };
+    const v1 = { note_id: noteId };
     let v2 = { data: v1 };
     console.log(v2);
     const response = await fetch("/getnote", {
@@ -36,26 +38,8 @@ const ViewNote = () => {
     // return body;
     setNote(body);
   }
-
-  // let notes = mydata();
-  // console.log(notes);
-  // let notes = [
-  //   {
-  //     text: "Today was a good day in Oregon",
-  //     id: "123456",
-  //   },
-  //   {
-  //     text: "Saludos de Michoacan",
-  //     id: "999999",
-  //   },
-  //   {
-  //     text: "Сегодня моя машина взорвалась",
-  //     id: "111111",
-  //   },
-  // ];
-
-  const location = useLocation();
-  let noteId = location.pathname.replace("/view-note/", "");
+  //const location = useLocation();
+  //let noteId = location.pathname.replace("/view-note/", "");
   // let note;
   // for (let i = 0; i < notes.length; i++) {
   //   if (notes[i].id === noteId) {

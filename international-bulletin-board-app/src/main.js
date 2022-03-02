@@ -4,24 +4,38 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
 //We can pass data through components like so
-	let change = 0;
-
+	//const [replyStatus, setStatus] = useState(0);
+	const [notes, setNotes] = useState({});
 	useEffect(() => {
-
+		allNotes();
 	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
-	}, [change])
+	}, [])
+
+	async function allNotes() {
+		//const v1 = { note_id: noteId };
+		//let v2 = { data: v1 };
+		//console.log(v2);
+		const response = await fetch("/getall", {
+		  method: "GET",
+		  headers: { "Content-type": "application/json" }
+		});
+		const body = await response.json();
+		console.log(body);
+		// return body;
+		setNotes(body);
+	  }
 	//replace with actual database 
+	/*
 	let notes = [
 		{
 			text: 'Today was a good day in Oregon',
-			id: '123456'
+			id: '1'
 			//color: 'red'
 		},
 		{
@@ -33,7 +47,7 @@ const Main = (argument1, argument2) => {
 			id: '111111'
 		}
   ]
-
+*/
 
 	return(
 		<div>
@@ -47,10 +61,10 @@ const Main = (argument1, argument2) => {
 						{notes.map((note, index) => (
 							<Link 
 								to={{
-									pathname:`/view-note/${note.id}`, 
+									pathname:`/view-note/${note.note_id}`, 
 								}}
 							>
-								<div className="note m-2 shadow p-2"> {note.text} </div>
+								<div className="note m-2 shadow p-2"> {note.message} </div>
 							</Link>
 						))}
 					</div>
