@@ -173,3 +173,23 @@ exports.getReplyNotes = async function (parent_note_id) {
     db.close();
   });
 };
+
+/**
+ * Retrieves count of reply notes for a specific parent note
+ * @async
+ * @param {Integer} parent_note_id The parent note id that should have its replies counted
+ * @returns {Object} An object containing count of replies
+ */
+exports.getReplyNoteCount = async function (parent_note_id) {
+  return new Promise((resolve, reject) => {
+    let db = connectDatabase();
+    let query = `SELECT COUNT(*) as count FROM notes WHERE parent_note_id = ?`;
+    db.get(query, [parent_note_id], (error, row) => {
+      if (error) {
+        reject(error.message);
+      }
+      resolve(row);
+    });
+    db.close();
+  });
+};

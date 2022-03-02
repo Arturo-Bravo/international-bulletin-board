@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
@@ -33,20 +28,20 @@ const Main = (argument1, argument2) => {
 	//Durstenfeld shuffle https://stackoverflow.com/a/12646864
 	function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-	}
-	shuffleArray(range);
-	let x = 0;
-	let y = 0;
-	let upperLimit = 0.90
-	let lowerLimit = 0.10
-	for(let i=0; i< notes.length; i++){
-		x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
-		y = range[i] * 25;
-		rngesus.push({x, y});
-	}
+  }
+  shuffleArray(range);
+  let x = 0;
+  let y = 0;
+  let upperLimit = 0.9;
+  let lowerLimit = 0.1;
+  for (let i = 0; i < notes.length; i++) {
+    x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
+    y = range[i] * 25;
+    rngesus.push({ x, y });
+  }
 
 	function randomRoute(){
 		setRandom(Math.floor(Math.random() * notes.length))
@@ -74,7 +69,9 @@ const Main = (argument1, argument2) => {
 										left: `${rngesus[index].x}%`,
 										top: `${rngesus[index].y}px`
 									}}
-								> {note.message} </div>
+								>
+								{note.message} 
+								</div>
 							</Link>
 						))}
 					</div>
@@ -88,14 +85,11 @@ const Main = (argument1, argument2) => {
 					<button>New Note</button>
 				</Link>
 				{
-				<Link
-					to={ `/view-note/` }
-				>
+				<Link to={`/view-note/`}>
 				<button onClick={randomRoute}>View Random</button>
 				</Link>
 				}
 			</footer>
-			
 			
 				<Routes>
 						<Route path="/new-note" element={<NewNote/>}/>
@@ -104,7 +98,13 @@ const Main = (argument1, argument2) => {
 			</Router>
 		</div>
 
-	)
-}
+        <Routes>
+          <Route path="/new-note" element={<NewNote />} />
+          <Route path="/view-note/:noteId" element={<ViewNote />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+};
 
 export default Main;

@@ -6,12 +6,17 @@ import ReplyHolder from "./replyHolder";
 import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
-  const [replyStatus, setStatus] = useState(0);
+  //const [replyStatus, setStatus] = useState(0);
   const [note, setNote] = useState({});
+  const [replyCount, setReplyCount] = useState(0);
+  const location = useLocation();
+
+  let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
     mydata();
-  }, []);
+    fetchReplyNoteCount(noteId);
+  }, [noteId]);
 
   function openReply() {
     setStatus(1);
@@ -103,7 +108,11 @@ const ViewNote = () => {
 
               <div className="d-flex justify-content-between">
                 <button onClick={openReply}>Reply</button>
-                <button onClick={viewReplies}>View Replies(12)</button>
+                {replyCount !== 0 && (
+                  <button
+                    onClick={viewReplies}
+                  >{`View Replies(${replyCount})`}</button>
+                )}
               </div>
             </div>
           </div>
@@ -152,7 +161,11 @@ const ViewNote = () => {
 
               <div className="d-flex justify-content-between">
                 <button onClick={openReply}>Reply</button>
-                <button onClick={viewReplies}>View Replies(12)</button>
+                {replyCount !== 0 && (
+                  <button
+                    onClick={viewReplies}
+                  >{`View Replies(${replyCount})`}</button>
+                )}
               </div>
             </div>
           </div>
@@ -169,7 +182,7 @@ const ViewNote = () => {
     <div className="backdrop h-100 w-100">
       <div
         id="parentForm"
-        className="d-flex align-items-center justify-content-start col-lg-6 col-md-8 col-10 h-75"
+        className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75"
       >
         <div id="noteView" className="bg-success p-5">
           <button className="close" onClick={closeBox}>
@@ -203,7 +216,11 @@ const ViewNote = () => {
 
           <div className="d-flex justify-content-between">
             <button onClick={openReply}>Reply</button>
-            <button onClick={viewReplies}>View Replies(12)</button>
+            {replyCount !== 0 && (
+              <button
+                onClick={viewReplies}
+              >{`View Replies(${replyCount})`}</button>
+            )}
           </div>
         </div>
       </div>

@@ -63,3 +63,43 @@ app.post("/savenote", async (req, res) => {
   console.log(results);
   res.send("Success");
 });
+
+app.get("/getreplies", async (req, res) => {
+  let parent_note = req.query.parent_note;
+  try {
+    const result = await db.getReplyNotes(parent_note);
+    res.send(result);
+  } catch (error) {
+    console.error(`Error feteching reply notes from database: ${error}`);
+  }
+});
+
+app.get("/getreplycount", async (req, res) => {
+  let parent_note = req.query.parent_note;
+  try {
+    const result = await db.getReplyNoteCount(parent_note);
+    res.send(result);
+  } catch (error) {
+    console.error(`Error feteching reply note count from database: ${error}`);
+  }
+});
+
+/*
+    axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,
+    {
+        headers: {
+            "Cache-Control": "no-cache",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }
+    )
+    .then(
+        (response) => {
+            console.log(response.data.translations[0].text, "response");
+            res.send({message: response.data.translations[0].text})
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
+*/
