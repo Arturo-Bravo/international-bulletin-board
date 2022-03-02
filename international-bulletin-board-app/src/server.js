@@ -36,6 +36,7 @@ app.post("/getnote", async (req, res) => {
   console.log(req.body);
   let note_id = req.body.note_id;
   await db.insertBoardNote("English", "Red", "Hello"); // Just to make sure there is always a note to retrieve
+  await db.insertBoardNote("spanish", "green", "I really like dogs");
   const data = await db.getNote(note_id);
   res.send(data);
 });
