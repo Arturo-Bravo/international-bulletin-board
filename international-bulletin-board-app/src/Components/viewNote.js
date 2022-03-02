@@ -23,7 +23,7 @@ const ViewNote = () => {
 
   //change to actual database
   async function mydata() {
-    const v1 = { note_id: 0 };
+    const v1 = { note_id: 1 };
     let v2 = { data: v1 };
     console.log(v2);
     const response = await fetch("/getnote", {
