@@ -6,7 +6,6 @@ import ReplyHolder from "./replyHolder";
 import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
-  //const [replyStatus, setStatus] = useState(0);
   const [note, setNote] = useState({});
   const [replyCount, setReplyCount] = useState(0);
   const [replyStatus, setStatus] = useState(0);
@@ -56,15 +55,6 @@ const ViewNote = () => {
     const data = await response.json();
     setReplyCount(data.count);
   }
-  //const location = useLocation();
-  //let noteId = location.pathname.replace("/view-note/", "");
-  // let note;
-  // for (let i = 0; i < notes.length; i++) {
-  //   if (notes[i].id === noteId) {
-  //     note = notes[i];
-  //     break;
-  //   }
-  // }
 
   const langs = [
     { value: "en", label: "English" },
