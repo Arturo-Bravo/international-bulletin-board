@@ -13,7 +13,7 @@ const Main = (argument1, argument2) => {
 	const [notes, setNotes] = useState([]);
 	useEffect(() => {
 		allNotes();
-		setRandom(Math.floor(Math.random() * notes.length))	
+		//setRandom(Math.floor(Math.random() * notes.length))	
 	}, []);
 	const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
@@ -51,7 +51,7 @@ const Main = (argument1, argument2) => {
 	function randomRoute(){
 		setRandom(Math.floor(Math.random() * notes.length))
 	}
-	console.log(notes);
+	console.log("Notes -->",notes);
 	return(
 		<div>
 			<header >
@@ -89,7 +89,7 @@ const Main = (argument1, argument2) => {
 				</Link>
 				{
 				<Link
-					to={ `/view-note/${notes[randomIndex].note_id}` }
+					to={ `/view-note/` }
 				>
 				<button onClick={randomRoute}>View Random</button>
 				</Link>
