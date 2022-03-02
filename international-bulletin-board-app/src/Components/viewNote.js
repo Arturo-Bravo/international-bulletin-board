@@ -9,6 +9,7 @@ const ViewNote = () => {
   //const [replyStatus, setStatus] = useState(0);
   const [note, setNote] = useState({});
   const [replyCount, setReplyCount] = useState(0);
+  const [replyStatus, setStatus] = useState(0);
   const location = useLocation();
 
   let noteId = location.pathname.replace("/view-note/", "");
@@ -31,9 +32,6 @@ const ViewNote = () => {
     navigate("/");
   }
 
-  const location = useLocation();
-  let noteId = location.pathname.replace("/view-note/", "");
-  
   async function mydata() {
     const v1 = { note_id: noteId };
     let v2 = { data: v1 };
@@ -47,6 +45,16 @@ const ViewNote = () => {
     console.log(body);
     // return body;
     setNote(body);
+  }
+  async function fetchReplyNoteCount(parent_note) {
+    const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
+      method: "GET",
+    });
+    if (response.status !== 200) {
+      console.log(`Error fetching reply notes: ${response.status}`);
+    }
+    const data = await response.json();
+    setReplyCount(data.count);
   }
   //const location = useLocation();
   //let noteId = location.pathname.replace("/view-note/", "");

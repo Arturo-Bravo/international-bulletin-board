@@ -22,6 +22,7 @@ const Main = (argument1, argument2) => {
 		setNotes(body);
 	  }
 
+
 	let rngesus = [];
 	//generate range of notes
 	let range = [...notes.keys()];
@@ -90,14 +91,6 @@ const Main = (argument1, argument2) => {
 				</Link>
 				}
 			</footer>
-			
-				<Routes>
-						<Route path="/new-note" element={<NewNote/>}/>
-						<Route path="/view-note/:noteId" element={<ViewNote/>}/>
-				</Routes>
-			</Router>
-		</div>
-
         <Routes>
           <Route path="/new-note" element={<NewNote />} />
           <Route path="/view-note/:noteId" element={<ViewNote />} />
