@@ -8,7 +8,7 @@ const sqlite3 = require("sqlite3").verbose();
  */
 function connectDatabase() {
   // Connects if exists, otherwise creates database file
-  let db = new sqlite3.Database("./db/board.db", (error) => {
+  let db = new sqlite3.Database(__dirname + "/board.db", (error) => {
     if (error) {
       return console.error(error.message);
     }
@@ -169,6 +169,26 @@ exports.getReplyNotes = async function (parent_note_id) {
         reject(error.message);
       }
       resolve(rows);
+    });
+    db.close();
+  });
+};
+
+/**
+ * Retrieves count of reply notes for a specific parent note
+ * @async
+ * @param {Integer} parent_note_id The parent note id that should have its replies counted
+ * @returns {Object} An object containing count of replies
+ */
+exports.getReplyNoteCount = async function (parent_note_id) {
+  return new Promise((resolve, reject) => {
+    let db = connectDatabase();
+    let query = `SELECT COUNT(*) as count FROM notes WHERE parent_note_id = ?`;
+    db.get(query, [parent_note_id], (error, row) => {
+      if (error) {
+        reject(error.message);
+      }
+      resolve(row);
     });
     db.close();
   });

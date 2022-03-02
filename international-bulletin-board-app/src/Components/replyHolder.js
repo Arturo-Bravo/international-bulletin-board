@@ -4,8 +4,11 @@ import { KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 
 const ReplyHolder = ({ parent_note, setStatus }) => {
   const [replyToView, setReply] = useState(0);
+  const [replyNotes, setReplyNotes] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchReplyNotes(parent_note);
+  }, [parent_note]);
 
   function prevReply() {
     setReply(replyToView - 1);
@@ -15,23 +18,19 @@ const ReplyHolder = ({ parent_note, setStatus }) => {
     setReply(replyToView + 1);
   }
 
+  async function fetchReplyNotes(parent_note) {
+    const response = await fetch(`/getreplies?parent_note=${parent_note}`, {
+      method: "GET",
+    });
+    if (response.status !== 200) {
+      console.log(`Error fetching reply notes: ${response.status}`);
+    }
+    const data = await response.json();
+    setReplyNotes(data);
+  }
+
   // This would be fetched notes with the passed down parent id
   // notes = fetch(parent_note) or something
-
-  let notes = [
-    {
-      text: "Today was a good day in Oregon",
-      id: "123456",
-    },
-    {
-      text: "Saludos de Michoacan",
-      id: "999999",
-    },
-    {
-      text: "Сегодня моя машина взорвалась",
-      id: "111111",
-    },
-  ];
 
   return (
     <div
@@ -44,12 +43,14 @@ const ReplyHolder = ({ parent_note, setStatus }) => {
             <KeyboardArrowUp />
           </button>
         )}
-        <ViewReplies
-          note={notes[replyToView]}
-          setStatus={setStatus}
-          viewRepliesClick={setReply}
-        />
-        {replyToView !== notes.length - 1 && (
+        {replyNotes.length !== 0 && (
+          <ViewReplies
+            note={replyNotes[replyToView]}
+            setStatus={setStatus}
+            viewRepliesClick={setReply}
+          />
+        )}
+        {replyToView !== replyNotes.length - 1 && (
           <button className="nextReply" onClick={nextReply}>
             <KeyboardArrowDown />
           </button>

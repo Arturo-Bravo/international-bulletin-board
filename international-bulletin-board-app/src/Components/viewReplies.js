@@ -4,7 +4,11 @@ import Select from "react-select";
 import CloseIcon from "@material-ui/icons/Close";
 
 const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
-  useEffect(() => {}, []);
+  const [replyCount, setReplyCount] = useState(0);
+
+  useEffect(() => {
+    fetchReplyNoteCount(note.note_id);
+  }, [note]);
 
   const navigate = useNavigate();
 
@@ -13,13 +17,24 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
   }
 
   function openReply() {
-    navigate(`/view-note/${note.id}`);
+    navigate(`/view-note/${note.note_id}`);
     setStatus(1);
   }
 
   function viewReplies() {
-    navigate(`/view-note/${note.id}`);
+    navigate(`/view-note/${note.note_id}`);
     viewRepliesClick(0);
+  }
+
+  async function fetchReplyNoteCount(parent_note) {
+    const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
+      method: "GET",
+    });
+    if (response.status !== 200) {
+      console.log(`Error fetching reply notes: ${response.status}`);
+    }
+    const data = await response.json();
+    setReplyCount(data.count);
   }
 
   const langs = [
@@ -43,7 +58,7 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         <button className="close" onClick={closeBox}>
           <CloseIcon />
         </button>
-        <h1> {note.text} </h1>
+        <h1> {note.message} </h1>
         <p>Detected Language: Spanish?</p>
         <div className="d-flex justify-content-between align-items-center">
           <label htmlFor="language">Display Language: </label>
@@ -71,7 +86,11 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
 
         <div className="d-flex justify-content-between">
           <button onClick={openReply}>Reply</button>
-          <button onClick={viewReplies}>View Replies(12)</button>
+          {replyCount !== 0 && (
+            <button
+              onClick={viewReplies}
+            >{`View Replies(${replyCount})`}</button>
+          )}
         </div>
       </div>
     </div>
