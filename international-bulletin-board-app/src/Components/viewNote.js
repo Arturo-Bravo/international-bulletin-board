@@ -8,8 +8,14 @@ import CloseIcon from "@material-ui/icons/Close";
 const ViewNote = () => {
   //normally here we would fetch a single note
   const [replyStatus, setStatus] = useState(0);
+  const [replyCount, setReplyCount] = useState(0);
+  const location = useLocation();
 
-  useEffect(() => {}, []);
+  let noteId = location.pathname.replace("/view-note/", "");
+
+  useEffect(() => {
+    fetchReplyNoteCount(noteId);
+  }, [noteId]);
 
   function openReply() {
     setStatus(1);
@@ -24,23 +30,36 @@ const ViewNote = () => {
     navigate("/");
   }
 
+  async function fetchReplyNoteCount(parent_note) {
+    const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
+      method: "GET",
+    });
+    if (response.status !== 200) {
+      console.log(`Error fetching reply notes: ${response.status}`);
+    }
+    const data = await response.json();
+    setReplyCount(data.count);
+  }
+
   let notes = [
     {
       text: "Today was a good day in Oregon",
-      id: "123456",
+      id: "1",
     },
     {
       text: "Saludos de Michoacan",
-      id: "999999",
+      id: "2",
     },
     {
       text: "Сегодня моя машина взорвалась",
-      id: "111111",
+      id: "3",
+    },
+    {
+      text: "reply number 1",
+      id: "4",
     },
   ];
 
-  const location = useLocation();
-  let noteId = location.pathname.replace("/view-note/", "");
   let note;
   for (let i = 0; i < notes.length; i++) {
     if (notes[i].id === noteId) {
@@ -98,7 +117,11 @@ const ViewNote = () => {
 
               <div className="d-flex justify-content-between">
                 <button onClick={openReply}>Reply</button>
-                <button onClick={viewReplies}>View Replies(12)</button>
+                {replyCount !== 0 && (
+                  <button
+                    onClick={viewReplies}
+                  >{`View Replies(${replyCount})`}</button>
+                )}
               </div>
             </div>
           </div>
@@ -147,7 +170,11 @@ const ViewNote = () => {
 
               <div className="d-flex justify-content-between">
                 <button onClick={openReply}>Reply</button>
-                <button onClick={viewReplies}>View Replies(12)</button>
+                {replyCount !== 0 && (
+                  <button
+                    onClick={viewReplies}
+                  >{`View Replies(${replyCount})`}</button>
+                )}
               </div>
             </div>
           </div>
@@ -164,7 +191,7 @@ const ViewNote = () => {
     <div className="backdrop h-100 w-100">
       <div
         id="parentForm"
-        className="d-flex align-items-center justify-content-start col-lg-6 col-md-8 col-10 h-75"
+        className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75"
       >
         <div id="noteView" className="bg-success p-5">
           <button className="close" onClick={closeBox}>
@@ -198,7 +225,11 @@ const ViewNote = () => {
 
           <div className="d-flex justify-content-between">
             <button onClick={openReply}>Reply</button>
-            <button onClick={viewReplies}>View Replies(12)</button>
+            {replyCount !== 0 && (
+              <button
+                onClick={viewReplies}
+              >{`View Replies(${replyCount})`}</button>
+            )}
           </div>
         </div>
       </div>
