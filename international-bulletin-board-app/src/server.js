@@ -43,7 +43,7 @@ app.post("/getnote", async (req, res) => {
 
 app.get("/getall", async (req, res) => {
   const data = await db.getBoardNotes();
-  console.log(data);
+  console.log("This is the data", data);
   res.send(data);
 });
 

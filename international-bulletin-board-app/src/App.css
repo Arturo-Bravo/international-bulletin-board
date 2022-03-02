@@ -2,12 +2,21 @@
   height: 75vh;
 }
 
+#board {
+  background-image: url("pics/board.jpg");
+  border: 5px ridge rgb(199, 199, 199);
+}
+
 .note {
   width: 10%;
   height: 15%;
   overflow: scroll;
   background-color: rgb(248, 248, 157);
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  /* https://getcssscan.com/css-box-shadow-examples */
 }
 
 button {
@@ -40,8 +49,14 @@ button {
   width: 100%;
 }
 
+#repliesView {
+  position: relative;
+  width: 100%;
+}
+
 .select-color {
   width: 50%;
+  z-index: 10;
 }
 
 #selectColor {
@@ -61,4 +76,48 @@ footer + div {
   position: absolute;
   top: -10px;
   right: -10px;
+}
+
+.prevReply {
+  position: absolute;
+  top: -5%;
+  right: 50%;
+  z-index: 5;
+}
+
+.nextReply {
+  position: absolute;
+  top: 95%;
+  right: 50%;
+  z-index: 5;
+}
+
+@media (min-width: 768px) {
+  .slide-right {
+    animation: slide 0.5s;
+    position: relative;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translate(100vw);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  .slide-center {
+    position: relative;
+    animation: center-slide 0.5s;
+  }
+
+  @keyframes center-slide {
+    0% {
+      transform: translate(50%);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
 }
