@@ -141,7 +141,7 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.text} </h1>
+              <h1> {note.message} </h1>
               <p>Detected Language: Spanish?</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
