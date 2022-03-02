@@ -17,11 +17,12 @@ const Main = (argument1, argument2) => {
 
 	//THIS IS WHERE DATA WILL BE FETCHED FROM BACKEND
 	}, [change])
-
+	//replace with actual database 
 	let notes = [
 		{
 			text: 'Today was a good day in Oregon',
 			id: '123456'
+			//color: 'red'
 		},
 		{
 			text: 'Saludos de Michoacan',
@@ -32,6 +33,7 @@ const Main = (argument1, argument2) => {
 			id: '111111'
 		}
   ]
+
 
 	return(
 		<div>

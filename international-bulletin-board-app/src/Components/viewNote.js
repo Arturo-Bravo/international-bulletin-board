@@ -22,8 +22,18 @@ const ViewNote = () => {
 		navigate('/');
 	}
 
-
-	let notes = [
+	//change to actual database 
+	async function mydata()
+	{
+		const v1 = {data: "Hello", lan: "ES"};
+		let v2 = {data : v1}
+		console.log(v2);
+		const response = await fetch('/savenote', { method: 'POST',headers:{'Content-type':"application/json"}, body: JSON.stringify(v1) });
+		const body = await response.json();
+		return body 
+	}
+	let notes = mydata();
+	/*let notes = [
 		{
 			text: 'Today was a good day in Oregon',
 			id: '123456'
@@ -37,6 +47,7 @@ const ViewNote = () => {
 			id: '111111'
 		}
   ]
+  */
 
 	const location = useLocation();
 	let noteId = location.pathname.replace('/view-note/', '')
@@ -59,6 +70,16 @@ const ViewNote = () => {
 		//can access option.value and option.label
 		//value should be the one we need for the argument to pass to DeepL
 	}
+
+	function mydata() {
+		const v1 = {data: document.getElementById("data").innerHTML, lan: "ES"};
+		let v2 = {data : v1}
+		console.log(v2);
+		const response = await fetch('/translate', { method: 'POST',headers:{'Content-type':"application/json"}, body: JSON.stringify(v1) });
+		const body = await response.json();
+		return body 
+	  };
+
 	//If it is replying
 	if(replyStatus === 1){
 		return(
