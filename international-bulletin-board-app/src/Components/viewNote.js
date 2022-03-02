@@ -5,10 +5,12 @@ import ReplyNote from "./replyNote";
 import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
-  //normally here we would fetch a single note
   const [replyStatus, setStatus] = useState(0);
+  const [note, setNote] = useState({});
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    mydata();
+  }, []);
 
   function openReply() {
     setStatus(1);
@@ -21,44 +23,46 @@ const ViewNote = () => {
 
   //change to actual database
   async function mydata() {
-    const v1 = { data: "Hello", lan: "ES" };
+    const v1 = { note_id: 0 };
     let v2 = { data: v1 };
     console.log(v2);
-    const response = await fetch("/savenote", {
+    const response = await fetch("/getnote", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(v1),
     });
     const body = await response.json();
     console.log(body);
-    return body;
+    // return body;
+    setNote(body);
   }
-  let notes = mydata();
-  /*let notes = [
-		{
-			text: 'Today was a good day in Oregon',
-			id: '123456'
-		},
-		{
-			text: 'Saludos de Michoacan',
-			id: '999999'
-		},
-		{
-			text: 'Сегодня моя машина взорвалась',
-			id: '111111'
-		}
-  ]
-  */
+
+  // let notes = mydata();
+  // console.log(notes);
+  // let notes = [
+  //   {
+  //     text: "Today was a good day in Oregon",
+  //     id: "123456",
+  //   },
+  //   {
+  //     text: "Saludos de Michoacan",
+  //     id: "999999",
+  //   },
+  //   {
+  //     text: "Сегодня моя машина взорвалась",
+  //     id: "111111",
+  //   },
+  // ];
 
   const location = useLocation();
   let noteId = location.pathname.replace("/view-note/", "");
-  let note;
-  for (let i = 0; i < notes.length; i++) {
-    if (notes[i].id === noteId) {
-      note = notes[i];
-      break;
-    }
-  }
+  // let note;
+  // for (let i = 0; i < notes.length; i++) {
+  //   if (notes[i].id === noteId) {
+  //     note = notes[i];
+  //     break;
+  //   }
+  // }
 
   const langs = [
     { value: "en", label: "English" },
@@ -82,7 +86,7 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.text} </h1>
+              <h1> {note.message} </h1>
               <p>Detected Language: Spanish?</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -133,7 +137,7 @@ const ViewNote = () => {
           <button className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
-          <h1> {note.text} </h1>
+          <h1> {note.message} </h1>
           <p>Detected Language: Spanish?</p>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
