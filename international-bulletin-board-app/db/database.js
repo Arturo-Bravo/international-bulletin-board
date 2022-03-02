@@ -8,7 +8,7 @@ const sqlite3 = require("sqlite3").verbose();
  */
 function connectDatabase() {
   // Connects if exists, otherwise creates database file
-  let db = new sqlite3.Database("/db/board.db", (error) => {
+  let db = new sqlite3.Database("../db/board.db", (error) => {
     if (error) {
       return console.error(error.message);
     }
