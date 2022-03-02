@@ -47,7 +47,6 @@ const Main = (argument1, argument2) => {
 	function randomRoute(){
 		setRandom(Math.floor(Math.random() * notes.length))
 	}
-	console.log("Notes -->",notes);
 	return(
 		<div>
 			<header >
