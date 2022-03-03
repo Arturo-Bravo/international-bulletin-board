@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express(); 
+const app = express();
 const port = process.env.PORT || 6000;
 const db = require("../db/database");
 
@@ -29,6 +29,7 @@ app.post("/translate", (req, res) => {
     res.send({ message: response.data.translations[0].text });
   });
 });
+
 app.get("/getnote", async (req, res) => {
   let note_id = req.query.note_id;
   try {
@@ -40,20 +41,42 @@ app.get("/getnote", async (req, res) => {
 });
 
 app.get("/getall", async (req, res) => {
-  const data = await db.getBoardNotes();
-  console.log("This is the data", data);
-  res.send(data);
+  try {
+    const data = await db.getBoardNotes();
+    res.send(data);
+  } catch (error) {
+    console.error(`Error retrieving board notes: ${error}`);
+  }
 });
 
 app.post("/savenote", async (req, res) => {
-  const axios = require("axios");
   let message = req.body.data;
   let lan = req.body.lan;
   let color = req.body.color;
-  await db.insertBoardNote(lan, color, message);
-  const results = await db.getBoardNotes();
-  console.log(results);
-  res.send("Success");
+  try {
+    const result = await db.insertBoardNote(lan, color, message);
+    if (result) res.send("Success");
+  } catch (error) {
+    console.error(`Error inserting board note into database: ${error}`);
+  }
+});
+
+app.post("/savereplynote", async (req, res) => {
+  let message = req.body.data;
+  let lan = req.body.lan;
+  let color = req.body.color;
+  let parent_note_id = req.body.parent_note_id;
+  try {
+    const result = await db.insertReplyNote(
+      lan,
+      color,
+      message,
+      parent_note_id
+    );
+    if (result) res.send("Success");
+  } catch (error) {
+    console.error(`Error inserting reply note into database: ${error}`);
+  }
 });
 
 app.get("/getreplies", async (req, res) => {
@@ -75,23 +98,3 @@ app.get("/getreplycount", async (req, res) => {
     console.error(`Error feteching reply note count from database: ${error}`);
   }
 });
-
-/*
-    axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,
-    {
-        headers: {
-            "Cache-Control": "no-cache",
-            "Access-Control-Allow-Origin": "*",
-        },
-    }
-    )
-    .then(
-        (response) => {
-            console.log(response.data.translations[0].text, "response");
-            res.send({message: response.data.translations[0].text})
-        },
-        (error) => {
-            console.log(error);
-        }
-    );
-*/

@@ -14,7 +14,7 @@ const ViewNote = () => {
   let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
-    getNote();
+    getNote(noteId);
     fetchReplyNoteCount(noteId);
   }, [noteId]);
 
@@ -31,7 +31,7 @@ const ViewNote = () => {
     navigate("/");
   }
 
-  async function getNote() {
+  async function getNote(noteId) {
     const response = await fetch(`/getnote?note_id=${noteId}`, {
       method: "GET",
     });
@@ -110,7 +110,10 @@ const ViewNote = () => {
           </div>
 
           <div className="col-md-5 col-10 slide-right">
-            <ReplyNote cancel={setStatus} />
+            <ReplyNote
+              cancel={setStatus}
+              fetchReplyNoteCount={fetchReplyNoteCount}
+            />
           </div>
         </div>
       </div>
