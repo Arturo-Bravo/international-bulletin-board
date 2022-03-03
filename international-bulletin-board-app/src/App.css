@@ -7,6 +7,10 @@
   border: 5px ridge rgb(199, 199, 199);
 }
 
+#board > a {
+  height: 5.2em;
+}
+
 .note {
   width: 5em;
   height: 5em;

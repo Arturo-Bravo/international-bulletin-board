@@ -4,11 +4,10 @@ import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
-  const [randomIndex, setRandom] = useState(0);
+  const [randomIndex, setRandom] = useState(-1);
   const [notes, setNotes] = useState([]);
   useEffect(() => {
-    allNotes();
-    //setRandom(Math.floor(Math.random() * notes.length))
+    allNotes()
   }, []);
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
@@ -22,6 +21,7 @@ const Main = (argument1, argument2) => {
     });
     const body = await response.json();
     setNotes(body);
+    setRandom(Math.floor(Math.random() * notes.length))
   }
 
   let rngesus = [];
@@ -91,11 +91,11 @@ const Main = (argument1, argument2) => {
           >
             <button>New Note</button>
           </Link>
-          {
-            <Link to={`/view-note/`}>
-              <button onClick={randomRoute}>View Random</button>
-            </Link>
-          }
+          { randomIndex !== -1 && (
+						<Link to={`/view-note/${notes[randomIndex].note_id}`}>
+							<button onClick={randomRoute}>View Random</button>
+						</Link>
+					)}
         </footer>
         <Routes>
           <Route path="/new-note" element={<NewNote />} />
