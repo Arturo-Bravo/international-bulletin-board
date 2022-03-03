@@ -7,7 +7,7 @@ const Main = (argument1, argument2) => {
   const [randomIndex, setRandom] = useState(-1);
   const [notes, setNotes] = useState([]);
   useEffect(() => {
-    allNotes()
+    allNotes();
   }, []);
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
@@ -21,7 +21,7 @@ const Main = (argument1, argument2) => {
     });
     const body = await response.json();
     setNotes(body);
-    setRandom(Math.floor(Math.random() * notes.length))
+    setRandom(Math.floor(Math.random() * notes.length));
   }
 
   let rngesus = [];
@@ -39,11 +39,11 @@ const Main = (argument1, argument2) => {
   let y = 0;
   let upperLimit = 0.4;
   let lowerLimit = 0.05;
-	let yProduct = 8;
-	if(vw < 600){
-		upperLimit = 0.2;
-		yProduct = 4;
-	}
+  let yProduct = 8;
+  if (vw < 600) {
+    upperLimit = 0.2;
+    yProduct = 4;
+  }
   for (let i = 0; i < notes.length; i++) {
     x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
     y = range[i] * yProduct;
@@ -62,25 +62,26 @@ const Main = (argument1, argument2) => {
         <div className="container-fluid">
           <div id="notesBox" className="row justify-content-center">
             <div id="board" className="col-10 d-flex flex-wrap">
-              {notes.map((note, index) => (
-                <Link
-                  to={{
-                    pathname: `/view-note/${note.note_id}`,
-                  }}
-                  key={index}
-                >
-                  <div
-                    className="note m-2 p-2"
-                    style={{
-                      position: "relative",
-                      left: `${rngesus[index].x}%`,
-                      top: `${rngesus[index].y}px`,
+              {notes.length !== 0 &&
+                notes.map((note, index) => (
+                  <Link
+                    to={{
+                      pathname: `/view-note/${note.note_id}`,
                     }}
+                    key={index}
                   >
-                    {note.message}
-                  </div>
-                </Link>
-              ))}
+                    <div
+                      className="note m-2 p-2"
+                      style={{
+                        position: "relative",
+                        left: `${rngesus[index].x}%`,
+                        top: `${rngesus[index].y}px`,
+                      }}
+                    >
+                      {note.message}
+                    </div>
+                  </Link>
+                ))}
             </div>
           </div>
         </div>
@@ -91,11 +92,11 @@ const Main = (argument1, argument2) => {
           >
             <button>New Note</button>
           </Link>
-          { randomIndex !== -1 && (
-						<Link to={`/view-note/${notes[randomIndex].note_id}`}>
-							<button onClick={randomRoute}>View Random</button>
-						</Link>
-					)}
+          {notes.length !== 0 && randomIndex !== -1 && (
+            <Link to={`/view-note/${notes[randomIndex].note_id}`}>
+              <button onClick={randomRoute}>View Random</button>
+            </Link>
+          )}
         </footer>
         <Routes>
           <Route path="/new-note" element={<NewNote />} />

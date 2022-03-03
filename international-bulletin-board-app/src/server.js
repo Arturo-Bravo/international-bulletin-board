@@ -2,11 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 6000;
+const port = process.argv[2] || 6000;
 const db = require("../db/database");
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static("build"));
 
 app.listen(port, async () => {
   console.log(`Listening on port ${port}`);

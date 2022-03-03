@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prod": "npm run build",
+    "postprod": "node src/server.js 3000"
   },
   "eslintConfig": {
     "extends": [
