@@ -10,7 +10,6 @@ const Main = (argument1, argument2) => {
 		allNotes();
 		//setRandom(Math.floor(Math.random() * notes.length))	
 	}, []);
-	const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
 	async function allNotes() {
 		const response = await fetch("/getall", {
@@ -20,8 +19,10 @@ const Main = (argument1, argument2) => {
 		const body = await response.json();
 		console.log("This is the data", body);
 		setNotes(body);
-	  }
+	}
 
+	//view width dimensions https://stackoverflow.com/a/8876069
+	const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
 	let rngesus = [];
 	//generate range of notes
@@ -36,11 +37,16 @@ const Main = (argument1, argument2) => {
   shuffleArray(range);
   let x = 0;
   let y = 0;
-  let upperLimit = 0.9;
-  let lowerLimit = 0.1;
+  let upperLimit = 0.8;
+  let lowerLimit = 0.05;
+	let yProduct = 8;
+	if(vw < 600){
+		upperLimit = 0.2;
+		yProduct = 4;
+	}
   for (let i = 0; i < notes.length; i++) {
     x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
-    y = range[i] * 25;
+    y = range[i] * yProduct;
     rngesus.push({ x, y });
   }
 
@@ -55,13 +61,14 @@ const Main = (argument1, argument2) => {
 			<Router>
 			<div className="container-fluid">
 				<div id="notesBox" className="row justify-content-center">
-					<div id="board" className="col-10">
+					<div id="board" className="col-10 mb-4 position-relative d-flex flex-wrap">
 						{notes.map((note, index) => (
 							<Link 
 								to={{
 									pathname:`/view-note/${note.note_id}`, 
 								}}
 								key={index}
+								className=""
 							>
 								<div className="note m-2 p-2"
 									style={{
@@ -77,7 +84,7 @@ const Main = (argument1, argument2) => {
 					</div>
 				</div>
 			</div>
-			<footer className="d-flex justify-content-around mt-2">
+			<footer className="d-flex justify-content-around my-2 p-2">
 				<Link 
 					to={ '/new-note' }
 					// state={{ fromMain: change }}
