@@ -48,7 +48,7 @@ function NewNote()  {
 	};
 
 	return(
-		<div className="w-100 h-100 backdrop">
+		<div className="backdrop">
 		<div id="parentForm" className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75">
 			<div id="noteForm" className="p-4 col-12">
 				<button className="close" onClick={closeBox}>
