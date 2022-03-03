@@ -14,7 +14,7 @@ const ViewNote = () => {
   let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
-    mydata();
+    getNote();
     fetchReplyNoteCount(noteId);
   }, [noteId]);
 
@@ -31,20 +31,14 @@ const ViewNote = () => {
     navigate("/");
   }
 
-  async function mydata() {
-    const v1 = { note_id: noteId };
-    let v2 = { data: v1 };
-    console.log(v2);
-    const response = await fetch("/getnote", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(v1),
+  async function getNote() {
+    const response = await fetch(`/getnote?note_id=${noteId}`, {
+      method: "GET",
     });
     const body = await response.json();
-    console.log(body);
-    // return body;
     setNote(body);
   }
+
   async function fetchReplyNoteCount(parent_note) {
     const response = await fetch(`/getreplycount?parent_note=${parent_note}`, {
       method: "GET",

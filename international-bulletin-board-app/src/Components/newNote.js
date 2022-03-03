@@ -5,20 +5,12 @@ import CloseIcon from '@material-ui/icons/Close'
 
 function NewNote()  {
 
-	// const location = useLocation();
-	// let { fromMain } = location.state;
-	// console.log(fromMain)
-
 	useEffect(() => {
 
 	}, [])
-
-	//Form variables
 	const [noteText, setNote] = useState("");
-	//const [selectedColor, setColor] = useState([])
 	async function newNote() {
 		let v1 = { data: noteText, color: document.getElementById("selectColor").innerText, lan: "spanish" };
-		console.log(v1);
 		const response = await fetch("/savenote", {
 		  method: "POST",
 		  headers: { "Content-type": "application/json" },
@@ -51,8 +43,6 @@ function NewNote()  {
 	const noteCreate = (event) => {
 		event.preventDefault();
 		newNote();
-		console.log(document.getElementById("selectColor").innerText)
-		console.log("This is the note text ",noteText);
 		navigate('/');
 		window.location.reload();
 	};
