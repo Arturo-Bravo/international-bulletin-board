@@ -4,11 +4,10 @@ import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
 
 const Main = (argument1, argument2) => {
-  const [randomIndex, setRandom] = useState(0);
+  const [randomIndex, setRandom] = useState(-1);
   const [notes, setNotes] = useState([]);
   useEffect(() => {
-    allNotes();
-    //setRandom(Math.floor(Math.random() * notes.length))
+    allNotes()
   }, []);
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
@@ -22,6 +21,7 @@ const Main = (argument1, argument2) => {
     });
     const body = await response.json();
     setNotes(body);
+    setRandom(Math.floor(Math.random() * notes.length))
   }
 
   let rngesus = [];
@@ -37,11 +37,16 @@ const Main = (argument1, argument2) => {
   shuffleArray(range);
   let x = 0;
   let y = 0;
-  let upperLimit = 0.9;
-  let lowerLimit = 0.1;
+  let upperLimit = 0.4;
+  let lowerLimit = 0.05;
+	let yProduct = 8;
+	if(vw < 600){
+		upperLimit = 0.2;
+		yProduct = 4;
+	}
   for (let i = 0; i < notes.length; i++) {
     x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
-    y = range[i] * 25;
+    y = range[i] * yProduct;
     rngesus.push({ x, y });
   }
 
@@ -56,7 +61,7 @@ const Main = (argument1, argument2) => {
       <Router>
         <div className="container-fluid">
           <div id="notesBox" className="row justify-content-center">
-            <div id="board" className="col-10">
+            <div id="board" className="col-10 d-flex flex-wrap">
               {notes.map((note, index) => (
                 <Link
                   to={{
@@ -86,11 +91,11 @@ const Main = (argument1, argument2) => {
           >
             <button>New Note</button>
           </Link>
-          {
-            <Link to={`/view-note/`}>
-              <button onClick={randomRoute}>View Random</button>
-            </Link>
-          }
+          { randomIndex !== -1 && (
+						<Link to={`/view-note/${notes[randomIndex].note_id}`}>
+							<button onClick={randomRoute}>View Random</button>
+						</Link>
+					)}
         </footer>
         <Routes>
           <Route path="/new-note" element={<NewNote />} />
