@@ -1,5 +1,5 @@
 #notesBox {
-  height: 75vh;
+  min-height: 75vh;
 }
 
 #board {
@@ -7,10 +7,15 @@
   border: 5px ridge rgb(199, 199, 199);
 }
 
+#board > a {
+  height: 5.2em;
+}
+
 .note {
-  width: 10%;
-  height: 15%;
-  overflow: scroll;
+  width: 5em;
+  height: 5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background-color: rgb(248, 248, 157);
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -28,6 +33,8 @@ button {
 
 .backdrop {
   background-color: rgba(77, 75, 75, 0.384);
+  height: 100%;
+  width: 100%;
 }
 
 #parentForm {

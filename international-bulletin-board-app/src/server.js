@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express(); 
-const port = process.env.PORT || 6000;
+const app = express();
+const port = process.argv[2] || 6000;
 const db = require("../db/database");
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static("build"));
 
 app.listen(port, async () => {
   console.log(`Listening on port ${port}`);
@@ -36,6 +37,7 @@ app.get("/translate", (req, res) => {
         }
     );
 });
+
 app.get("/getnote", async (req, res) => {
   let note_id = req.query.note_id;
   try {
@@ -47,19 +49,42 @@ app.get("/getnote", async (req, res) => {
 });
 
 app.get("/getall", async (req, res) => {
-  const data = await db.getBoardNotes();
-  res.send(data);
+  try {
+    const data = await db.getBoardNotes();
+    res.send(data);
+  } catch (error) {
+    console.error(`Error retrieving board notes: ${error}`);
+  }
 });
 
 app.post("/savenote", async (req, res) => {
-  const axios = require("axios");
   let message = req.body.data;
   let lan = req.body.lan;
   let color = req.body.color;
-  await db.insertBoardNote(lan, color, message);
-  const results = await db.getBoardNotes();
-  console.log(results);
-  res.send("Success");
+  try {
+    const result = await db.insertBoardNote(lan, color, message);
+    if (result) res.send("Success");
+  } catch (error) {
+    console.error(`Error inserting board note into database: ${error}`);
+  }
+});
+
+app.post("/savereplynote", async (req, res) => {
+  let message = req.body.data;
+  let lan = req.body.lan;
+  let color = req.body.color;
+  let parent_note_id = req.body.parent_note_id;
+  try {
+    const result = await db.insertReplyNote(
+      lan,
+      color,
+      message,
+      parent_note_id
+    );
+    if (result) res.send("Success");
+  } catch (error) {
+    console.error(`Error inserting reply note into database: ${error}`);
+  }
 });
 
 app.get("/getreplies", async (req, res) => {
