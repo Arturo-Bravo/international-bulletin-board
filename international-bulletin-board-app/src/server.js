@@ -13,21 +13,28 @@ app.listen(port, async () => {
   await db.createNoteTable();
 });
 
-app.post("/translate", (req, res) => {
+app.get("/translate", (req, res) => {
   const axios = require("axios");
-  console.log(req.body);
-  var message = req.body.data;
-  var lan = req.body.lan;
-  const translate = require("deepl");
-  const key = "958e4684-90e8-4a43-869b-c5a5fed4980c:fx";
-  translate({
-    text: message,
-    target_lang: lan,
-    auth_key: key,
-  }).then((response) => {
-    console.log(response.data.translations[0].text, "response");
-    res.send({ message: response.data.translations[0].text });
-  });
+  let message = req.query.message;
+  var lan = req.query.language;
+  const URI = `https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}&target_lang=${lan}`;
+  const url = encodeURI(URI);
+  axios.get(url,
+    {
+        headers: {
+            "Cache-Control": "no-cache",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }
+    )
+    .then(
+        (response) => {
+            res.send({message: response.data.translations[0].text, detected_language: response.data.translations[0].detected_source_language})
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
 });
 app.get("/getnote", async (req, res) => {
   let note_id = req.query.note_id;
@@ -41,7 +48,6 @@ app.get("/getnote", async (req, res) => {
 
 app.get("/getall", async (req, res) => {
   const data = await db.getBoardNotes();
-  console.log("This is the data", data);
   res.send(data);
 });
 
@@ -75,6 +81,20 @@ app.get("/getreplycount", async (req, res) => {
     console.error(`Error feteching reply note count from database: ${error}`);
   }
 });
+
+//var message = req.body.data;
+  /*
+  const translate = require("deepl");
+  const key = "958e4684-90e8-4a43-869b-c5a5fed4980c:fx";
+  translate({
+    text: message,
+    target_lang: lan,
+    auth_key: key,
+  }).then((response) => {
+    console.log(response.data.translations[0].text, "response");
+    res.send({ message: response.data.translations[0].text });
+  });
+  */
 
 /*
     axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,

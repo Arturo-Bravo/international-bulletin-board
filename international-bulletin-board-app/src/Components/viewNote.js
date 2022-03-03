@@ -7,10 +7,11 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
   const [note, setNote] = useState({});
+  const [noteMessage, setMessage] = useState("");
   const [replyCount, setReplyCount] = useState(0);
   const [replyStatus, setStatus] = useState(0);
   const location = useLocation();
-
+  let data1; 
   let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
@@ -30,7 +31,25 @@ const ViewNote = () => {
   function closeBox() {
     navigate("/");
   }
-
+  async function translateNote(value) {
+    let lan = value;
+    const response = await fetch(`/translate?message=${note.message}&language=${lan}`, {
+      method: "GET",
+    });
+    const body = await response.json();
+    let apidata = [];
+    let loop = 0;
+    while(loop < langs.length)
+    {
+      if(body.detected_language === langs[loop].value)
+      {
+        //console.log(langs[loop].label);
+        apidata = {message: body.message, detected_language: langs[loop].label};
+      }
+      loop = loop +1;
+    }
+    setNote(apidata);
+  }
   async function getNote() {
     const response = await fetch(`/getnote?note_id=${noteId}`, {
       method: "GET",
@@ -51,13 +70,34 @@ const ViewNote = () => {
   }
 
   const langs = [
-    { value: "en", label: "English" },
-    { value: "sp", label: "Spanish" },
-    { value: "rs", label: "Russian" },
+    { value: "EN", label: "English" },
+    { value: "ES", label: "Spanish" },
+    { value: "RU", label: "Russian" },
+    { value: "BG", label: "Bulgarian" },
+    { value: "CS", label: "Czech" },
+    { value: "DA", label: "Danish" },
+    { value: "DE", label: "German" },
+    { value: "EL", label: "Greek" },
+    { value: "ET", label: "Estonian" },
+    { value: "FI", label: "Finnish" },
+    { value: "FR", label: "French" },
+    { value: "HU", label: "Hungarian" },
+    { value: "IT", label: "Italian" },
+    { value: "JA", label: "Japanese" },
+    { value: "LT", label: "Lithuanian" },
+    { value: "LV", label: "Latvian" },
+    { value: "NL", label: "Dutch" },
+    { value: "PL", label: "Polish" },
+    { value: "PT", label: "Portuguese" },
+    { value: "RO", label: "Romanian" },
+    { value: "SK", label: "Slovak" },
+    { value: "SL", label: "Slovenian" },
+    { value: "SV", label: "Swedish" },
+    { value: "ZH", label: "Chinese" },
   ];
 
-  const langChange = (option) => {
-    console.log(option);
+  const langChange = async (option) => {
+    let data = await translateNote(option.value);
     //can access option.value and option.label
     //value should be the one we need for the argument to pass to DeepL
   };
@@ -72,8 +112,8 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.message} </h1>
-              <p>Detected Language: Spanish?</p>
+              <h1>{note.message}</h1>
+              <p>Original Language: {note.detected_language}</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
@@ -126,7 +166,7 @@ const ViewNote = () => {
                 <CloseIcon />
               </button>
               <h1> {note.message} </h1>
-              <p>Detected Language: Spanish?</p>
+              <p>Original Language: {note.detected_language} </p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
@@ -180,8 +220,8 @@ const ViewNote = () => {
           <button className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
-          <h1> {note.message} </h1>
-          <p>Detected Language: Spanish?</p>
+          <h1>{note.message}</h1>
+          <p>Original Language: {note.detected_language}</p>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
             <Select
