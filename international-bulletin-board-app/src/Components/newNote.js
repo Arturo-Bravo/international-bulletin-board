@@ -53,7 +53,6 @@ function NewNote()  {
       		}
       		loop = loop +1;
     	}
-		console.log("This is the language", foundlan); 
 		return foundlan;
 	}
 
@@ -97,9 +96,10 @@ function NewNote()  {
     navigate("/");
   }
 
-  const noteCreate = (event) => {
+  const noteCreate = async (event) => {
     event.preventDefault();
-    newNote();
+    let language = await detectLanguage(noteText); 
+	newNote(language);
     navigate("/");
     window.location.reload();
   };

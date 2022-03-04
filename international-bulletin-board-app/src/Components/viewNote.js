@@ -43,7 +43,6 @@ const ViewNote = () => {
     {
       if(body.detected_language === langs[loop].value)
       {
-        //console.log(langs[loop].label);
         apidata = {message: body.message, detected_language: langs[loop].label};
       }
       loop = loop +1;
