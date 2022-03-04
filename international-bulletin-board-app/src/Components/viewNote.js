@@ -7,11 +7,10 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const ViewNote = () => {
   const [note, setNote] = useState({});
-  const [noteMessage, setMessage] = useState("");
   const [replyCount, setReplyCount] = useState(0);
   const [replyStatus, setStatus] = useState(0);
+  const [originalLanguage, setOriginalLanguage] = useState("");
   const location = useLocation();
-  let data1; 
   let noteId = location.pathname.replace("/view-note/", "");
 
   useEffect(() => {
@@ -33,19 +32,21 @@ const ViewNote = () => {
   }
   async function translateNote(value) {
     let lan = value;
-    const response = await fetch(`/translate?message=${note.message}&language=${lan}`, {
-      method: "GET",
-    });
-    const body = await response.json();
-    let apidata = [];
-    let loop = 0;
-    while(loop < langs.length)
-    {
-      if(body.detected_language === langs[loop].value)
+    const response = await fetch(
+      `/translate?message=${note.message}&language=${lan}`,
       {
-        apidata = {message: body.message, detected_language: langs[loop].label};
+        method: "GET",
       }
-      loop = loop +1;
+    );
+    const body = await response.json();
+    let apidata = {};
+    for (let language of langs) {
+      if (body.detected_language === language.value) {
+        apidata = {
+          message: body.message,
+          detected_language: originalLanguage,
+        };
+      }
     }
     setNote(apidata);
   }
@@ -55,6 +56,7 @@ const ViewNote = () => {
     });
     const body = await response.json();
     setNote(body);
+    setOriginalLanguage(body.detected_language);
   }
 
   async function fetchReplyNoteCount(parent_note) {
@@ -96,7 +98,7 @@ const ViewNote = () => {
   ];
 
   const langChange = async (option) => {
-    let data = await translateNote(option.value);
+    await translateNote(option.value);
     //can access option.value and option.label
     //value should be the one we need for the argument to pass to DeepL
   };

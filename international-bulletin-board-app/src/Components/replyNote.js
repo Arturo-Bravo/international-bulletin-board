@@ -6,30 +6,30 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
   //This is gonna need to handle stuff different than the NewNote component
   useEffect(() => {}, []);
   const langs = [
-	{ value: "EN", label: "English" },
-	{ value: "ES", label: "Spanish" },
-	{ value: "RU", label: "Russian" },
-	{ value: "BG", label: "Bulgarian" },
-	{ value: "CS", label: "Czech" },
-	{ value: "DA", label: "Danish" },
-	{ value: "DE", label: "German" },
-	{ value: "EL", label: "Greek" },
-	{ value: "ET", label: "Estonian" },
-	{ value: "FI", label: "Finnish" },
-	{ value: "FR", label: "French" },
-	{ value: "HU", label: "Hungarian" },
-	{ value: "IT", label: "Italian" },
-	{ value: "JA", label: "Japanese" },
-	{ value: "LT", label: "Lithuanian" },
-	{ value: "LV", label: "Latvian" },
-	{ value: "NL", label: "Dutch" },
-	{ value: "PL", label: "Polish" },
-	{ value: "PT", label: "Portuguese" },
-	{ value: "RO", label: "Romanian" },
-	{ value: "SK", label: "Slovak" },
-	{ value: "SL", label: "Slovenian" },
-	{ value: "SV", label: "Swedish" },
-	{ value: "ZH", label: "Chinese" },
+    { value: "EN", label: "English" },
+    { value: "ES", label: "Spanish" },
+    { value: "RU", label: "Russian" },
+    { value: "BG", label: "Bulgarian" },
+    { value: "CS", label: "Czech" },
+    { value: "DA", label: "Danish" },
+    { value: "DE", label: "German" },
+    { value: "EL", label: "Greek" },
+    { value: "ET", label: "Estonian" },
+    { value: "FI", label: "Finnish" },
+    { value: "FR", label: "French" },
+    { value: "HU", label: "Hungarian" },
+    { value: "IT", label: "Italian" },
+    { value: "JA", label: "Japanese" },
+    { value: "LT", label: "Lithuanian" },
+    { value: "LV", label: "Latvian" },
+    { value: "NL", label: "Dutch" },
+    { value: "PL", label: "Polish" },
+    { value: "PT", label: "Portuguese" },
+    { value: "RO", label: "Romanian" },
+    { value: "SK", label: "Slovak" },
+    { value: "SL", label: "Slovenian" },
+    { value: "SV", label: "Swedish" },
+    { value: "ZH", label: "Chinese" },
   ];
 
   //Form variables
@@ -57,25 +57,23 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
     let note = document.getElementById("noteForm");
     note.style.backgroundColor = color.value;
   };
-  async function detectLanguage(message)
-	{
-		let lan = "ES";
-    	const response = await fetch(`/translate?message=${message}&language=${lan}`, {
-      	method: "GET",
-    	});
-    	const body = await response.json();
-    	let foundlan;
-    	let loop = 0;
-    	while(loop < langs.length)
-    	{
-      		if(body.detected_language === langs[loop].value)
-      		{
-			  foundlan = langs[loop].label;
-      		}
-      		loop = loop +1;
-    	}
-		return foundlan;
-	}
+  async function detectLanguage(message) {
+    let lan = "ES";
+    const response = await fetch(
+      `/translate?message=${message}&language=${lan}`,
+      {
+        method: "GET",
+      }
+    );
+    const body = await response.json();
+    let foundlan;
+    for (let language of langs) {
+      if (body.detected_language === language.value) {
+        foundlan = language.label;
+      }
+    }
+    return foundlan;
+  }
 
   async function newReplyNote(language) {
     let v1 = {
@@ -97,7 +95,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
 
   const noteCreate = async (event) => {
     event.preventDefault();
-	let language = await detectLanguage(noteText); 
+    let language = await detectLanguage(noteText);
     await newReplyNote(language);
     cancel(0);
     await fetchReplyNoteCount(noteId);
