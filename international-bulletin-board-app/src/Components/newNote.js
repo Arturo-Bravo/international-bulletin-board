@@ -5,14 +5,57 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function NewNote() {
   useEffect(() => {}, []);
-
   const [noteText, setNote] = useState("");
 
-  async function newNote() {
+  const langs = [
+    { value: "EN", label: "English" },
+    { value: "ES", label: "Spanish" },
+    { value: "RU", label: "Russian" },
+    { value: "BG", label: "Bulgarian" },
+    { value: "CS", label: "Czech" },
+    { value: "DA", label: "Danish" },
+    { value: "DE", label: "German" },
+    { value: "EL", label: "Greek" },
+    { value: "ET", label: "Estonian" },
+    { value: "FI", label: "Finnish" },
+    { value: "FR", label: "French" },
+    { value: "HU", label: "Hungarian" },
+    { value: "IT", label: "Italian" },
+    { value: "JA", label: "Japanese" },
+    { value: "LT", label: "Lithuanian" },
+    { value: "LV", label: "Latvian" },
+    { value: "NL", label: "Dutch" },
+    { value: "PL", label: "Polish" },
+    { value: "PT", label: "Portuguese" },
+    { value: "RO", label: "Romanian" },
+    { value: "SK", label: "Slovak" },
+    { value: "SL", label: "Slovenian" },
+    { value: "SV", label: "Swedish" },
+    { value: "ZH", label: "Chinese" },
+  ];
+  async function detectLanguage(message) {
+    let lan = "ES";
+    const response = await fetch(
+      `/translate?message=${message}&language=${lan}`,
+      {
+        method: "GET",
+      }
+    );
+    const body = await response.json();
+    let foundlan;
+    for (let language of langs) {
+      if (body.detected_language === language.value) {
+        foundlan = language.label;
+      }
+    }
+    return foundlan;
+  }
+
+  async function newNote(language) {
     let v1 = {
       data: noteText,
       color: document.getElementById("selectColor").innerText,
-      lan: "spanish",
+      lan: language,
     };
     const response = await fetch("/savenote", {
       method: "POST",
@@ -24,7 +67,6 @@ function NewNote() {
     }
     return;
   }
-
   //Set Colors here in value
   const options = [
     { value: "#feff9c", label: "Yellow" },
@@ -49,9 +91,10 @@ function NewNote() {
     navigate("/");
   }
 
-  const noteCreate = (event) => {
+  const noteCreate = async (event) => {
     event.preventDefault();
-    newNote();
+    let language = await detectLanguage(noteText);
+    newNote(language);
     navigate("/");
     window.location.reload();
   };
