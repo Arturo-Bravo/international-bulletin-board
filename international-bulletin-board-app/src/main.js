@@ -160,7 +160,9 @@ const Main = (argument1, argument2) => {
                         top: `${rngesus[index].y}px`,
                       }}
                     >
-                      {note.message}
+                      {note.message.length > 15
+                        ? note.message.slice(0, 15) + "..."
+                        : note.message}
                     </div>
                   </Link>
                 ))}

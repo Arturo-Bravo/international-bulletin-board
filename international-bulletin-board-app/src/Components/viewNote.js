@@ -10,6 +10,7 @@ const ViewNote = () => {
   const [replyCount, setReplyCount] = useState(0);
   const [replyStatus, setStatus] = useState(0);
   const [originalLanguage, setOriginalLanguage] = useState("");
+  const [noteSnippet, setNoteSnippet] = useState("");
   const location = useLocation();
   let noteId = location.pathname.replace("/view-note/", "");
 
@@ -57,6 +58,11 @@ const ViewNote = () => {
     const body = await response.json();
     setNote(body);
     setOriginalLanguage(body.detected_language);
+    if (body.message.length > 15) {
+      setNoteSnippet(body.message.slice(0, 15) + "...");
+    } else {
+      setNoteSnippet(body.message);
+    }
   }
 
   async function fetchReplyNoteCount(parent_note) {
@@ -113,7 +119,7 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1>{note.message}</h1>
+              <h1>{noteSnippet}</h1>
               <p>Original Language: {note.detected_language}</p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -133,10 +139,9 @@ const ViewNote = () => {
                   onChange={langChange}
                 />
               </div>
-
-              <p className="text-warning my-2">
-                This is where the main body text will be. A note would have a
-                title and body
+              <p className="my-2">Note:</p>
+              <p className="my-2 border border-dark px-2 mb-4">
+                {note.message}
               </p>
 
               <div className="d-flex justify-content-between">
@@ -169,7 +174,7 @@ const ViewNote = () => {
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
-              <h1> {note.message} </h1>
+              <h1> {noteSnippet} </h1>
               <p>Original Language: {note.detected_language} </p>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -189,10 +194,9 @@ const ViewNote = () => {
                   onChange={langChange}
                 />
               </div>
-
-              <p className="text-warning my-2">
-                This is where the main body text will be. A note would have a
-                title and body
+              <p className="my-2">Note:</p>
+              <p className="my-2 border border-dark px-2 mb-4">
+                {note.message}
               </p>
 
               <div className="d-flex justify-content-between">
@@ -224,7 +228,7 @@ const ViewNote = () => {
           <button className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
-          <h1>{note.message}</h1>
+          <h1>{noteSnippet}</h1>
           <p>Original Language: {note.detected_language}</p>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
@@ -244,11 +248,8 @@ const ViewNote = () => {
               onChange={langChange}
             />
           </div>
-
-          <p className="text-warning my-2">
-            This is where the main body text will be. A note would have a title
-            and body
-          </p>
+          <p className="my-2">Note:</p>
+          <p className="my-2 border border-dark px-2 mb-4">{note.message}</p>
 
           <div className="d-flex justify-content-between">
             <button onClick={openReply}>Reply</button>
