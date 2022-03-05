@@ -17,24 +17,27 @@ app.listen(port, async () => {
 app.get("/translate", (req, res) => {
   const axios = require("axios");
   let message = req.query.message;
-  var lan = req.query.language;
+  let lan = req.query.language;
   const URI = `https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}&target_lang=${lan}`;
   const url = encodeURI(URI);
-  axios.get(url,
-    {
-        headers: {
-            "Cache-Control": "no-cache",
-            "Access-Control-Allow-Origin": "*",
-        },
-    }
-    )
+  axios
+    .get(url, {
+      headers: {
+        "Cache-Control": "no-cache",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
     .then(
-        (response) => {
-            res.send({message: response.data.translations[0].text, detected_language: response.data.translations[0].detected_source_language})
-        },
-        (error) => {
-            console.log(error);
-        }
+      (response) => {
+        res.send({
+          message: response.data.translations[0].text,
+          detected_language:
+            response.data.translations[0].detected_source_language,
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
     );
 });
 
@@ -106,37 +109,3 @@ app.get("/getreplycount", async (req, res) => {
     console.error(`Error feteching reply note count from database: ${error}`);
   }
 });
-
-//var message = req.body.data;
-  /*
-  const translate = require("deepl");
-  const key = "958e4684-90e8-4a43-869b-c5a5fed4980c:fx";
-  translate({
-    text: message,
-    target_lang: lan,
-    auth_key: key,
-  }).then((response) => {
-    console.log(response.data.translations[0].text, "response");
-    res.send({ message: response.data.translations[0].text });
-  });
-  */
-
-/*
-    axios.get(`https://api-free.deepl.com/v2/translate?auth_key=958e4684-90e8-4a43-869b-c5a5fed4980c:fx&text=${message}, world&target_lang=${lan}`,
-    {
-        headers: {
-            "Cache-Control": "no-cache",
-            "Access-Control-Allow-Origin": "*",
-        },
-    }
-    )
-    .then(
-        (response) => {
-            console.log(response.data.translations[0].text, "response");
-            res.send({message: response.data.translations[0].text})
-        },
-        (error) => {
-            console.log(error);
-        }
-    );
-*/

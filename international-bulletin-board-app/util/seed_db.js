@@ -12,6 +12,9 @@ async function seed_db() {
   await db.insertReplyNote("english", "blue", "reply 2 number 2", 2);
   await db.insertReplyNote("english", "green", "reply 2 number 3", 2);
   await db.insertReplyNote("english", "green", "reply 4 number 1", 4);
+  for (let i = 0; i < 60; i++) {
+    await db.insertBoardNote("french", "green", `${i}`);
+  }
 }
 
 seed_db();
