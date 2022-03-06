@@ -88,6 +88,7 @@ const Main = (argument1, argument2) => {
     }, 500);
   }
 
+  // Random positioning of notes
   let rngesus = [];
   //generate range of notes
   let range = [...notes.keys()];
@@ -103,19 +104,20 @@ const Main = (argument1, argument2) => {
   let y = 0;
   let upperLimit = 0.4;
   let lowerLimit = 0.05;
-  let yProduct = 3;
+  let yProduct = 80;
   if (vw < 600) {
     upperLimit = 0.2;
-    yProduct = 1;
+    yProduct = 40;
   } else if (vw < 1200) {
     upperLimit = 0.2;
-    yProduct = 2;
+    yProduct = 60;
   }
   for (let i = 0; i < notes.length; i++) {
     x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
-    y = range[i] * yProduct;
+    y = (range[i] % yProduct);
     rngesus.push({ x, y });
   }
+  //---------------------------------------
 
   function randomRoute() {
     setRandom(Math.floor(Math.random() * notes.length));
