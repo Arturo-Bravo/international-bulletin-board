@@ -114,7 +114,7 @@ const Main = (argument1, argument2) => {
   }
   for (let i = 0; i < notes.length; i++) {
     x = (Math.random() * (upperLimit - lowerLimit) + lowerLimit) * 100;
-    y = (range[i] % yProduct);
+    y = range[i] % yProduct;
     rngesus.push({ x, y });
   }
   //---------------------------------------
