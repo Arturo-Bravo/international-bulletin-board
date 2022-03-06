@@ -101,14 +101,14 @@ footer + div {
 
 .prevNotes {
   position: absolute;
-  top: 400px;
+  top: 50%;
   left: 3%;
   width: 3%;
 }
 
 .nextNotes {
   position: absolute;
-  top: 400px;
+  top: 50%;
   right: 3%;
   width: 3%;
 }
