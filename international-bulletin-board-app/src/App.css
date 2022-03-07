@@ -1,3 +1,7 @@
+.notebackground
+{
+  background-color: #feff9c;
+}
 #notesBox {
   min-height: 75vh;
 }
@@ -12,6 +16,7 @@
 }
 
 .note {
+  color: black;
   width: 5em;
   height: 5em;
   overflow: hidden;
@@ -41,11 +46,13 @@ button {
   filter: none !important;
   margin: auto;
 }
+
 #noteForm {
   background-color: white;
   border: 1px solid black;
   position: relative;
 }
+
 #noteView {
   position: relative;
 }
@@ -59,6 +66,10 @@ button {
 #repliesView {
   position: relative;
   width: 100%;
+}
+
+#replyNavigation {
+  margin: auto;
 }
 
 .select-color {
@@ -88,14 +99,14 @@ footer + div {
 .prevReply {
   position: absolute;
   top: -5%;
-  right: 50%;
+  right: 45%;
   z-index: 5;
 }
 
 .nextReply {
   position: absolute;
   top: 95%;
-  right: 50%;
+  right: 45%;
   z-index: 5;
 }
 

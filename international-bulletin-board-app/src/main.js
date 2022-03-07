@@ -156,7 +156,9 @@ const Main = (argument1, argument2) => {
                   >
                     <div
                       className="note m-2 p-2"
-                      style={{
+
+                      style={{ 
+						backgroundColor: `${note.note_color}`, 
                         position: "relative",
                         left: `${rngesus[index].x}%`,
                         top: `${rngesus[index].y}px`,
