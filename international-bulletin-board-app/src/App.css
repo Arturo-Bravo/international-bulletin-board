@@ -100,6 +100,20 @@ footer + div {
   z-index: 5;
 }
 
+.prevNotes {
+  position: absolute;
+  top: 40%;
+  left: 3%;
+  width: 3%;
+}
+
+.nextNotes {
+  position: absolute;
+  top: 40%;
+  right: 3%;
+  width: 3%;
+}
+
 @media (min-width: 768px) {
   .slide-right {
     animation: slide 0.5s;
@@ -126,6 +140,34 @@ footer + div {
     }
     100% {
       transform: translate(0);
+    }
+  }
+
+  .slide-board-left {
+    position: relative;
+    animation: center-slide-left 0.5s;
+  }
+
+  @keyframes center-slide-left {
+    0% {
+      transform: translate(-50%);
+    }
+    100% {
+      transform: translate(0%);
+    }
+  }
+
+  .slide-board-right {
+    position: relative;
+    animation: center-slide-right 0.5s;
+  }
+
+  @keyframes center-slide-right {
+    0% {
+      transform: translate(50%);
+    }
+    100% {
+      transform: translate(0%);
     }
   }
 }
