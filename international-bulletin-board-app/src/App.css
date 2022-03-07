@@ -1,3 +1,7 @@
+.notebackground
+{
+  background-color: #feff9c;
+}
 #notesBox {
   min-height: 75vh;
 }

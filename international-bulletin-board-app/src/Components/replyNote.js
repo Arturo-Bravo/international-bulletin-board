@@ -35,7 +35,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
   //Form variables
   const [noteText, setNote] = useState("");
   const location = useLocation();
-
+  const [color, setColor] = useState("#feff9c")
   let noteId = location.pathname.replace("/view-note/", "");
 
   //Set Colors here in value
@@ -56,6 +56,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
   const handleColorChange = (color) => {
     let note = document.getElementById("noteForm");
     note.style.backgroundColor = color.value;
+    setColor(color.value);
   };
   async function detectLanguage(message) {
     let lan = "ES";
@@ -78,7 +79,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
   async function newReplyNote(language) {
     let v1 = {
       data: noteText,
-      color: document.getElementById("selectColor").innerText,
+      color: color,
       lan: language,
       parent_note_id: noteId,
     };
