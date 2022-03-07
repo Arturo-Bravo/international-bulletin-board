@@ -46,11 +46,13 @@ button {
   filter: none !important;
   margin: auto;
 }
+
 #noteForm {
   background-color: white;
   border: 1px solid black;
   position: relative;
 }
+
 #noteView {
   position: relative;
 }
@@ -67,7 +69,6 @@ button {
 }
 
 #replyNavigation {
-  filter: none !important;
   margin: auto;
 }
 
