@@ -9,13 +9,12 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
 
   useEffect(() => {
     fetchReplyNoteCount(note.note_id);
-    console.log("This is the note color--->", note.note_color)
     let data = {
       message: note.message,
       detected_language: note.detected_language,
-      note_color: note.note_color
+      note_color: note.note_color,
     };
-    
+
     setMessage(data);
   }, [note]);
 
@@ -61,7 +60,7 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         apidata = {
           message: body.message,
           detected_language: note.detected_language,
-          note_color: note.note_color
+          note_color: note.note_color,
         };
       }
     }
@@ -106,7 +105,11 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
       id="parentForm"
       className="d-flex align-items-center justify-content-start h-75"
     >
-      <div id="repliesView" className="notebackground p-5" style={{ backgroundColor: `${note.note_color}`}}>
+      <div
+        id="repliesView"
+        className="notebackground p-5"
+        style={{ backgroundColor: `${note.note_color}` }}
+      >
         <button className="close" onClick={closeBox}>
           <CloseIcon />
         </button>
