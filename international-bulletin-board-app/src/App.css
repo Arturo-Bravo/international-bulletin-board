@@ -89,10 +89,10 @@ button {
 }
 
 footer + div:not(#footerInfo) {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -186,5 +186,11 @@ footer + div:not(#footerInfo) {
     100% {
       transform: translate(0%);
     }
+  }
+}
+
+@media (max-width: 386px) {
+  footer {
+    padding-bottom: 8em;
   }
 }
