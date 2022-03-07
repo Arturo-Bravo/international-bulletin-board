@@ -106,7 +106,7 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         <button className="close" onClick={closeBox}>
           <CloseIcon />
         </button>
-        <h1> {noteMessage.message} </h1>
+        <h1> {note.message.slice(0, 15) + "..."} </h1>
         <p>Original Language: {noteMessage.detected_language} </p>
         <div className="d-flex justify-content-between align-items-center">
           <label htmlFor="language">Display Language: </label>
@@ -126,10 +126,9 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
             onChange={langChange}
           />
         </div>
-
-        <p className="text-warning my-2">
-          This is where the main body text will be. A note would have a title
-          and body
+        <p className="my-2">Note:</p>
+        <p className="my-2 border border-dark px-2 mb-4">
+          {noteMessage.message}
         </p>
 
         <div className="d-flex justify-content-between">
