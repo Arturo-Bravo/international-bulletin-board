@@ -66,6 +66,11 @@ button {
   width: 100%;
 }
 
+#replyNavigation {
+  filter: none !important;
+  margin: auto;
+}
+
 .select-color {
   width: 50%;
   z-index: 10;
@@ -93,14 +98,14 @@ footer + div {
 .prevReply {
   position: absolute;
   top: -5%;
-  right: 50%;
+  right: 45%;
   z-index: 5;
 }
 
 .nextReply {
   position: absolute;
   top: 95%;
-  right: 50%;
+  right: 45%;
   z-index: 5;
 }
 
