@@ -1,5 +1,4 @@
-.notebackground
-{
+.notebackground {
   background-color: #feff9c;
 }
 #notesBox {
@@ -13,6 +12,11 @@
 
 #board > a {
   height: 5.2em;
+}
+
+#footerInfo {
+  background-color: rgb(61, 61, 61);
+  color: white;
 }
 
 .note {
@@ -37,9 +41,12 @@ button {
 }
 
 .backdrop {
-  background-color: rgba(77, 75, 75, 0.384);
+  background-color: rgba(39, 39, 39, 0.61);
   height: 100%;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #parentForm {
@@ -81,7 +88,7 @@ button {
   color: rgb(48, 48, 48) !important;
 }
 
-footer + div {
+footer + div:not(#footerInfo) {
   position: absolute;
   top: 0;
   left: 0;

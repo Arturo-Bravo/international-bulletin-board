@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
+import Footer from "./Components/footerinfo";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 
 const Main = (argument1, argument2) => {
@@ -124,10 +125,10 @@ const Main = (argument1, argument2) => {
   }
   return (
     <div>
+      <Router>
       <header>
         <h1 className="my-2 text-center">Notes From Around the World</h1>
       </header>
-      <Router>
         <div className="container-fluid">
           <div id="notesBox" className="row justify-content-center">
             {noteDisplayIndex.start !== 0 && (
@@ -192,11 +193,12 @@ const Main = (argument1, argument2) => {
             <Link to={`/view-note/${notes[randomIndex].note_id}`}>
               <button onClick={randomRoute}>View Random</button>
             </Link>
-          )}
+          )}           
         </footer>
         <Routes>
           <Route path="/new-note" element={<NewNote />} />
           <Route path="/view-note/:noteId" element={<ViewNote />} />
+          <Route path="/" element={<Footer />} />
         </Routes>
       </Router>
     </div>
