@@ -6,7 +6,7 @@ import CloseIcon from "@material-ui/icons/Close";
 function NewNote() {
   useEffect(() => {}, []);
   const [noteText, setNote] = useState("");
-
+  const [color, setColor] = useState("#feff9c")
   const langs = [
     { value: "EN", label: "English" },
     { value: "ES", label: "Spanish" },
@@ -51,10 +51,10 @@ function NewNote() {
     return foundlan;
   }
 
-  async function newNote(language) {
+  async function newNote(language, Color) {
     let v1 = {
       data: noteText,
-      color: document.getElementById("selectColor").innerText,
+      color: color,
       lan: language,
     };
     const response = await fetch("/savenote", {
@@ -84,6 +84,7 @@ function NewNote() {
   const handleColorChange = (color) => {
     let note = document.getElementById("noteForm");
     note.style.backgroundColor = color.value;
+    setColor(color.value); 
   };
 
   const navigate = useNavigate();
@@ -94,7 +95,7 @@ function NewNote() {
   const noteCreate = async (event) => {
     event.preventDefault();
     let language = await detectLanguage(noteText);
-    newNote(language);
+    newNote(language, color);
     navigate("/");
     window.location.reload();
   };

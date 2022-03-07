@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NewNote from "./Components/newNote";
 import ViewNote from "./Components/viewNote";
+import { red } from "@material-ui/core/colors";
 
 const Main = (argument1, argument2) => {
   const [randomIndex, setRandom] = useState(-1);
@@ -72,7 +73,9 @@ const Main = (argument1, argument2) => {
                   >
                     <div
                       className="note m-2 p-2"
-                      style={{
+
+                      style={{ 
+						backgroundColor: `${note.note_color}`, 
                         position: "relative",
                         left: `${rngesus[index].x}%`,
                         top: `${rngesus[index].y}px`,
