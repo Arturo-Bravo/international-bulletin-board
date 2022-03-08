@@ -124,7 +124,8 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         <div className="d-flex justify-content-between align-items-center">
           <label htmlFor="language">Display Language: </label>
           <Select
-            id="selectColor"
+            id="langauge"
+            aria-labelledby="language"
             options={langs}
             className="select-color"
             theme={(theme, state) => ({
