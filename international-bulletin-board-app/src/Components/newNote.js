@@ -119,7 +119,7 @@ function NewNote() {
               {/* documentation: https://react-select.com/home 
 						Also making the parent div a row or a class container messes with the width of the options
 						so do not make it a row or contatiner*/}
-              <Select
+              <Select 
                 id="selectColor"
                 options={options}
                 className="select-color"
