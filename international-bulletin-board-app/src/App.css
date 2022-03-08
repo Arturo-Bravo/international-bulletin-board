@@ -1,5 +1,6 @@
 body {
-  height: 100vh;
+  height: 99vh;
+  overflow-x: hidden
 }
 
 .notebackground {
@@ -167,6 +168,7 @@ footer + div:not(#footerInfo) {
   .slide-board-left {
     position: relative;
     animation: center-slide-left 0.5s;
+    z-index: 1;
   }
 
   @keyframes center-slide-left {
@@ -181,6 +183,7 @@ footer + div:not(#footerInfo) {
   .slide-board-right {
     position: relative;
     animation: center-slide-right 0.5s;
+    z-index: 1;
   }
 
   @keyframes center-slide-right {
