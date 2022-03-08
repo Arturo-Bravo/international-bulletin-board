@@ -62,7 +62,6 @@ describe("Database methods", () => {
         if (error) {
           console.error(error.message);
         }
-        // console.log(row);
         assert.equal(row.detected_language, language);
         assert.equal(row.note_color, color);
         assert.equal(row.message, replyMessage);
@@ -115,7 +114,7 @@ describe("Database methods", () => {
     assert.equal(note.message, message);
 
     db.serialize(() => {
-      query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
+      let query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
       db.run(query, [language, color, message], (error) => {
         if (error) {
           console.error(error.message);
@@ -161,7 +160,7 @@ describe("Database methods", () => {
     assert(notes.length >= 2);
 
     db.serialize(() => {
-      query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
+      let query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
       db.run(query, [language, color, message1], (error) => {
         if (error) {
           console.error(error.message);
@@ -208,7 +207,7 @@ describe("Database methods", () => {
     await insertParent;
     let insertReplies = new Promise((res, rej) => {
       db.serialize(() => {
-        query = `INSERT INTO notes(detected_language, note_color, message, parent_note_id)
+        let query = `INSERT INTO notes(detected_language, note_color, message, parent_note_id)
         values(?, ?, ?, ?)`;
         db.run(query, [language, color, message1, note_id], function (error) {
           if (error) {
@@ -229,7 +228,7 @@ describe("Database methods", () => {
     assert(notes.length >= 2);
 
     db.serialize(() => {
-      query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
+      let query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
       db.run(query, [language, color, message1], (error) => {
         if (error) {
           console.error(error.message);
@@ -281,7 +280,7 @@ describe("Database methods", () => {
 
     let insertReplies = new Promise((res, rej) => {
       db.serialize(() => {
-        query = `INSERT INTO notes(detected_language, note_color, message, parent_note_id)
+        let query = `INSERT INTO notes(detected_language, note_color, message, parent_note_id)
         values(?, ?, ?, ?)`;
         db.run(query, [language, color, message1, note_id], function (error) {
           if (error) {
@@ -302,7 +301,7 @@ describe("Database methods", () => {
     assert(result.count >= 2);
 
     db.serialize(() => {
-      query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
+      let query = `DELETE FROM notes WHERE detected_language = ? AND note_color = ? AND message = ?`;
       db.run(query, [language, color, message1], (error) => {
         if (error) {
           console.error(error.message);
