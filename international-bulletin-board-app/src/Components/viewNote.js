@@ -104,7 +104,10 @@ const ViewNote = () => {
   ];
 
   const langChange = async (option) => {
+    let getlan = document.getElementById("loader");
+    getlan.style.display = "block";
     await translateNote(option.value);
+    getlan.style.display = "none";
     //can access option.value and option.label
     //value should be the one we need for the argument to pass to DeepL
   };
@@ -231,6 +234,9 @@ const ViewNote = () => {
           </button>
           <h1>{noteSnippet}</h1>
           <p>Original Language: {note.detected_language}</p>
+          <div id="loader" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
+                <span class="sr-only"></span>
+              </div>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
             <Select
