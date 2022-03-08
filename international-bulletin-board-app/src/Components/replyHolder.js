@@ -5,17 +5,27 @@ import { KeyboardArrowUp, KeyboardArrowDown } from "@material-ui/icons";
 const ReplyHolder = ({ parent_note, setStatus }) => {
   const [replyToView, setReply] = useState(0);
   const [replyNotes, setReplyNotes] = useState([]);
+  const [slideUp, setSlideUp] = useState(false);
+  const [slideDown, setSlideDown] = useState(false);
 
   useEffect(() => {
     fetchReplyNotes(parent_note);
   }, [parent_note]);
 
   function prevReply() {
+    setSlideUp(true);
     setReply(replyToView - 1);
+    setTimeout(() => {
+      setSlideUp(false);
+    }, 500);
   }
 
   function nextReply() {
+    setSlideDown(true);
     setReply(replyToView + 1);
+    setTimeout(() => {
+      setSlideDown(false);
+    }, 500);
   }
 
   async function fetchReplyNotes(parent_note) {
@@ -45,6 +55,8 @@ const ReplyHolder = ({ parent_note, setStatus }) => {
         )}
         {replyNotes.length !== 0 && (
           <ViewReplies
+            slideUp={slideUp}
+            slideDown={slideDown}
             note={replyNotes[replyToView]}
             setStatus={setStatus}
             viewRepliesClick={setReply}

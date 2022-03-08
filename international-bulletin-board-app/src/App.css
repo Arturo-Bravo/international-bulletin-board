@@ -194,6 +194,34 @@ footer + div:not(#footerInfo) {
       transform: translate(0%);
     }
   }
+
+  .slide-note-up {
+    position: relative;
+    animation: center-slide-up 0.5s;
+  }
+
+  @keyframes center-slide-up {
+    0% {
+      transform: translate(0%, -100%);
+    }
+    100% {
+      transform: translate(0%);
+    }
+  }
+
+  .slide-note-down {
+    position: relative;
+    animation: center-slide-down 0.5s;
+  }
+
+  @keyframes center-slide-down {
+    0% {
+      transform: translate(0%, 100%);
+    }
+    100% {
+      transform: translate(0%);
+    }
+  }
 }
 
 @media (max-width: 386px) {
