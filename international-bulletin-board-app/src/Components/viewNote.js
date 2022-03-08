@@ -124,7 +124,7 @@ const ViewNote = () => {
               className="notebackground p-4"
               style={{ backgroundColor: `${note.note_color}` }}
             >
-              <button className="close" onClick={closeBox}>
+              <button aria-label="close" className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
               <h1>{noteSnippet}</h1>
@@ -140,7 +140,8 @@ const ViewNote = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
-                  id="selectColor"
+                  id="language"
+                  aria-labelledby="language"
                   options={langs}
                   className="select-color"
                   theme={(theme, state) => ({
@@ -191,7 +192,7 @@ const ViewNote = () => {
               className="notebackground p-4 slide-center"
               style={{ backgroundColor: `${note.note_color}` }}
             >
-              <button className="close" onClick={closeBox}>
+              <button aria-label="close" className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
               <h1> {noteSnippet} </h1>
@@ -207,7 +208,8 @@ const ViewNote = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
-                  id="selectColor"
+                  id="language"
+                  aria-labelledby="language"
                   options={langs}
                   className="select-color"
                   theme={(theme, state) => ({
@@ -257,7 +259,7 @@ const ViewNote = () => {
           className="notebackground p-5"
           style={{ backgroundColor: `${note.note_color}` }}
         >
-          <button className="close" onClick={closeBox}>
+          <button aria-label="close" className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
           <h1>{noteSnippet}</h1>
@@ -273,7 +275,8 @@ const ViewNote = () => {
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
             <Select
-              id="selectColor"
+              id="language"
+              aria-labelledby="language"
               options={langs}
               className="select-color"
               theme={(theme, state) => ({
