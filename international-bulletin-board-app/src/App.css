@@ -41,7 +41,7 @@ button,
 input[type="submit"] {
   background-color: rgb(98, 50, 175);
   color: white;
-  padding: 0.5em 1em;
+  padding: 0.3em 0.6em;
   border: 1px solid transparent;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -53,8 +53,9 @@ button:active {
   border: 1px solid #ffffff;
 }
 input[type="submit"] {
-  background-color: rgb(142, 255, 142);
-  color: rgb(71, 71, 71);
+  background-color: rgb(21, 179, 21);
+  border: 1px solid black;
+  color: black;
 }
 input[type="submit"]:hover {
   background-color: rgb(72, 133, 72);
