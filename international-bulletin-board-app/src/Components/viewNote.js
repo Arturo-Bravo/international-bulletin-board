@@ -46,6 +46,7 @@ const ViewNote = () => {
         apidata = {
           message: body.message,
           detected_language: originalLanguage,
+          note_color: note.note_color,
         };
       }
     }
@@ -118,7 +119,11 @@ const ViewNote = () => {
       <div className="h-100 w-100 backdrop">
         <div className="d-flex align-items-center justify-content-around row h-75 w-100">
           <div className="mb-2 col-md-5 col-10 slide-in-right">
-            <div id="noteView" className="notebackground p-4" style={{ backgroundColor: `${note.note_color}`}}>
+            <div
+              id="noteView"
+              className="notebackground p-4"
+              style={{ backgroundColor: `${note.note_color}` }}
+            >
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
@@ -173,7 +178,11 @@ const ViewNote = () => {
       <div className="h-100 w-100 backdrop d-flex justify-content-center">
         <div className="d-flex align-items-center justify-content-around row h-75 w-100">
           <div className="mb-2 col-md-5 col-10">
-            <div id="noteView" className="notebackground p-4 slide-center" style={{ backgroundColor: `${note.note_color}`}}>
+            <div
+              id="noteView"
+              className="notebackground p-4 slide-center"
+              style={{ backgroundColor: `${note.note_color}` }}
+            >
               <button className="close" onClick={closeBox}>
                 <CloseIcon />
               </button>
@@ -222,21 +231,29 @@ const ViewNote = () => {
   }
 
   return (
-    <div className="backdrop h-100 w-100" >
+    <div className="backdrop h-100 w-100">
       <div
         id="parentForm"
         className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75"
       >
-        <div id="noteView" className="notebackground p-5" style={{ backgroundColor: `${note.note_color}`}}>
-        
+        <div
+          id="noteView"
+          className="notebackground p-5"
+          style={{ backgroundColor: `${note.note_color}` }}
+        >
           <button className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
           <h1>{noteSnippet}</h1>
           <p>Original Language: {note.detected_language}</p>
-          <div id="loader" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
-                <span class="sr-only"></span>
-              </div>
+          <div
+            id="loader"
+            class="spinner-border text-primary"
+            role="status"
+            style={{ display: "none" }}
+          >
+            <span class="sr-only"></span>
+          </div>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
             <Select
