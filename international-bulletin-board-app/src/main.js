@@ -140,6 +140,7 @@ const Main = (argument1, argument2) => {
               <button
                 className="prevNotes mx-0 px-0"
                 onClick={paginateNotesLeft}
+                aria-label="previous board"
               >
                 <KeyboardArrowLeft />
               </button>
@@ -189,6 +190,7 @@ const Main = (argument1, argument2) => {
               <button
                 className="nextNotes mx-0 px-0"
                 onClick={paginateNotesRight}
+                aria-label="next board"
               >
                 <KeyboardArrowRight />
               </button>

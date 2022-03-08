@@ -38,11 +38,35 @@ body {
   /* https://getcssscan.com/css-box-shadow-examples */
 }
 
-button {
-  background-color: rgb(98, 50, 175) !important;
-  color: white !important;
-  padding: 0.5em 1em;
-  border: none;
+button,
+input[type="submit"] {
+  background-color: rgb(98, 50, 175);
+  color: white;
+  padding: 0.3em 0.6em;
+  border: 1px solid transparent;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+button:hover {
+  background-color: rgb(0, 0, 0) !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+button:active {
+  border: 1px solid #ffffff;
+}
+input[type="submit"] {
+  background-color: rgb(21, 179, 21);
+  border: 1px solid black;
+  color: black;
+}
+input[type="submit"]:hover {
+  background-color: rgb(72, 133, 72);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.close {
+  position: absolute;
+  top: 1px;
+  right: 1px;
 }
 
 .backdrop {
@@ -100,12 +124,6 @@ footer + div:not(#footerInfo) {
   right: 0; */
   margin-left: auto;
   margin-right: auto;
-}
-
-.close {
-  position: absolute;
-  top: -10px;
-  right: -10px;
 }
 
 .prevReply {
