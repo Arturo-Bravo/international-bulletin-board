@@ -129,6 +129,14 @@ const ViewNote = () => {
               </button>
               <h1>{noteSnippet}</h1>
               <p>Original Language: {note.detected_language}</p>
+              <div
+                id="loader"
+                class="spinner-border text-primary"
+                role="status"
+                style={{ display: "none" }}
+              >
+                <span class="sr-only"></span>
+              </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
@@ -188,6 +196,14 @@ const ViewNote = () => {
               </button>
               <h1> {noteSnippet} </h1>
               <p>Original Language: {note.detected_language} </p>
+              <div
+                id="loader"
+                class="spinner-border text-primary"
+                role="status"
+                style={{ display: "none" }}
+              >
+                <span class="sr-only"></span>
+              </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
                 <Select
