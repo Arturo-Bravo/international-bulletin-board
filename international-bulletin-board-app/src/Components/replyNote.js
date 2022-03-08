@@ -119,6 +119,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
 						so do not make it a row or contatiner*/}
             <Select
               id="selectColor"
+              aria-labelledby="selectColor"
               options={options}
               className="select-color"
               styles={customStyles}
