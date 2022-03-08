@@ -30,6 +30,8 @@ const Main = (argument1, argument2) => {
   else maxNotesPerBoard = 30;
 
   async function allNotes() {
+    let getlan = document.getElementById("loaderMain");
+    getlan.style.display = "block";
     const response = await fetch("/getall", {
       method: "GET",
       headers: { "Content-type": "application/json" },
@@ -42,6 +44,7 @@ const Main = (argument1, argument2) => {
       body.length > maxNotesPerBoard ? maxNotesPerBoard : body.length;
     setNoteDisplayIndex({ start: 0, end: startingMax });
     setNotesToDisplay(body.slice(0, startingMax));
+    getlan.style.display = "none";
   }
 
   function paginateNotesLeft() {
@@ -147,6 +150,9 @@ const Main = (argument1, argument2) => {
                 (slideLeft ? " slide-board-left" : "")
               }
             >
+              <div id="loaderMain" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
+                <span class="sr-only"></span>
+              </div>
               {notes.length !== 0 &&
                 notesToDisplay.map((note, index) => (
                   <Link
