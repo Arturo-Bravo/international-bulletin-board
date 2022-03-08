@@ -113,18 +113,24 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         className="notebackground p-5"
         style={{ backgroundColor: `${note.note_color}` }}
       >
-        <button className="close" onClick={closeBox}>
+        <button className="close" onClick={closeBox} aria-label="close">
           <CloseIcon />
         </button>
         <h1> {note.message.slice(0, 15) + "..."} </h1>
         <p>Original Language: {noteMessage.detected_language} </p>
-        <div id="loaderReplies" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
-                <span class="sr-only"></span>
+        <div
+          id="loaderReplies"
+          class="spinner-border text-primary"
+          role="status"
+          style={{ display: "none" }}
+        >
+          <span class="sr-only"></span>
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <label htmlFor="language">Display Language: </label>
           <Select
-            id="selectColor"
+            id="langauge"
+            aria-labelledby="language"
             options={langs}
             className="select-color"
             theme={(theme, state) => ({

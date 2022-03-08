@@ -39,7 +39,11 @@ const ReplyHolder = ({ parent_note, setStatus }) => {
     >
       <div id="replyNavigation">
         {replyToView !== 0 && (
-          <button className="prevReply" onClick={prevReply}>
+          <button
+            className="prevReply"
+            onClick={prevReply}
+            aria-label="previous reply"
+          >
             <KeyboardArrowUp />
           </button>
         )}
@@ -51,7 +55,11 @@ const ReplyHolder = ({ parent_note, setStatus }) => {
           />
         )}
         {replyToView !== replyNotes.length - 1 && (
-          <button className="nextReply" onClick={nextReply}>
+          <button
+            className="nextReply"
+            onClick={nextReply}
+            aria-label="previous reply"
+          >
             <KeyboardArrowDown />
           </button>
         )}

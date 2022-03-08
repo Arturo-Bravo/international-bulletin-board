@@ -107,13 +107,13 @@ function NewNote() {
         className="d-flex align-items-center justify-content-center col-lg-6 col-md-8 col-10 h-75"
       >
         <div id="noteForm" className="p-4 col-12">
-          <button className="close" onClick={closeBox}>
+          <button aria-label="close" className="close" onClick={closeBox}>
             <CloseIcon />
           </button>
           <h1>New Note</h1>
           <form onSubmit={noteCreate} className="">
             <div className="form-group d-flex justify-content-between align-items-center">
-              <label className="select-color" htmlFor="color">
+              <label className="select-color" htmlFor="selectColor">
                 Select Color:
               </label>
               {/* documentation: https://react-select.com/home 
@@ -121,6 +121,8 @@ function NewNote() {
 						so do not make it a row or contatiner*/}
               <Select 
                 id="selectColor"
+                name="selectColor"
+                aria-labelledby="selectColor"
                 options={options}
                 className="select-color"
                 styles={customStyles}
