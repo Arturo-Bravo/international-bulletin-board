@@ -118,7 +118,7 @@ const ViewNote = () => {
     return (
       <div className="h-100 w-100 backdrop">
         <div className="d-flex align-items-center justify-content-around row h-75 w-100">
-          <div className="mb-2 col-md-5 col-10 slide-in-right">
+          <div className="mb-2 col-md-5 col-10 slide-center">
             <div
               id="noteView"
               className="notebackground p-4"
