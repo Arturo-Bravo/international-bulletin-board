@@ -95,7 +95,7 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
   ];
 
   const langChange = async (option) => {
-    let getlan = document.getElementById("loader");
+    let getlan = document.getElementById("loaderReplies");
     getlan.style.display = "block";
     await translateNote(option.value);
     getlan.style.display = "none";
@@ -118,7 +118,7 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         </button>
         <h1> {note.message.slice(0, 15) + "..."} </h1>
         <p>Original Language: {noteMessage.detected_language} </p>
-        <div id="loader" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
+        <div id="loaderReplies" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
                 <span class="sr-only"></span>
         </div>
         <div className="d-flex justify-content-between align-items-center">
