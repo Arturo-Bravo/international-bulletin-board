@@ -17,6 +17,12 @@ node src/server.js
 npm start
 ```
 
+### Testing
+
+Note: Currently tests only exist for the `database.js` module methods
+
+`npm test`
+
 ### Production
 
 For production run the following to build and serve application
