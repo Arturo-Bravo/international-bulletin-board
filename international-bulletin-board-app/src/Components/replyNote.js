@@ -148,6 +148,7 @@ const ReplyNote = ({ cancel, fetchReplyNoteCount }) => {
               onClick={() => {
                 cancel(0);
               }}
+              className="mt-4"
             >
               Cancel
             </button>
