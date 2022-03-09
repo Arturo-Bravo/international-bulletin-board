@@ -131,11 +131,11 @@ const ViewNote = () => {
               <p>Original Language: {note.detected_language}</p>
               <div
                 id="loader"
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 role="status"
                 style={{ display: "none" }}
               >
-                <span class="sr-only"></span>
+                <span className="sr-only"></span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -199,11 +199,11 @@ const ViewNote = () => {
               <p>Original Language: {note.detected_language} </p>
               <div
                 id="loader"
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 role="status"
                 style={{ display: "none" }}
               >
-                <span class="sr-only"></span>
+                <span className="sr-only"></span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -266,11 +266,11 @@ const ViewNote = () => {
           <p>Original Language: {note.detected_language}</p>
           <div
             id="loader"
-            class="spinner-border text-primary"
+            className="spinner-border text-primary"
             role="status"
             style={{ display: "none" }}
           >
-            <span class="sr-only"></span>
+            <span className="sr-only"></span>
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>

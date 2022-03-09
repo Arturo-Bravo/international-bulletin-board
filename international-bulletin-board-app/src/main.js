@@ -155,11 +155,11 @@ const Main = (argument1, argument2) => {
             >
               <div
                 id="loaderMain"
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 role="status"
                 style={{ display: "none" }}
               >
-                <span class="sr-only"></span>
+                <span className="sr-only"></span>
               </div>
               {notes.length !== 0 &&
                 notesToDisplay.map((note, index) => (
