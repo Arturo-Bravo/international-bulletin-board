@@ -133,6 +133,11 @@ const Main = (argument1, argument2) => {
         <h1 className="my-2 text-center" style={{fontFamily:'arial'}}>Notes From Around the World</h1>
       </header>
       <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet"></link> 
+        <header>
+          <h1 className="my-2 text-center text-white">
+            Notes From Around the World
+          </h1>
+        </header>
         <div className="container-fluid">
           <div id="notesBox" className="row justify-content-center">
             {noteDisplayIndex.start !== 0 && (
