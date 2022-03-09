@@ -129,8 +129,9 @@ const Main = (argument1, argument2) => {
   return (
     <div className="bg-dark h-100">
       <Router>
+      <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet"></link> 
         <header>
-          <h1 className="my-2 text-center text-white">
+          <h1 className="my-2 text-center text-white" style={{fontFamily:'arial'}}>
             Notes From Around the World
           </h1>
         </header>
@@ -177,6 +178,7 @@ const Main = (argument1, argument2) => {
                         position: "relative",
                         left: `${rngesus[index].x}%`,
                         top: `${rngesus[index].y}px`,
+                        fontFamily:'schoolbell'
                       }}
                     >
                       {note.message.length > 15

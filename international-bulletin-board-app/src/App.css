@@ -9,6 +9,10 @@ body {
 #notesBox {
   min-height: 75vh;
 }
+h1{
+  font-family: 'schoolbell';
+  font-weight: bold;
+}
 
 #board {
   background-image: url("pics/board.jpg");
