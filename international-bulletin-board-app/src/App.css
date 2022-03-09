@@ -13,9 +13,7 @@ h1{
   font-family: 'schoolbell';
   font-weight: bold;
 }
-.thenote{
-  
-}
+
 #board {
   background-image: url("pics/board.jpg");
   border: 5px ridge rgb(199, 199, 199);
