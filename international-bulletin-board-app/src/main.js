@@ -127,7 +127,7 @@ const Main = (argument1, argument2) => {
     setRandom(Math.floor(Math.random() * notes.length));
   }
   return (
-    <div>
+    <div className="bg-dark h-100">
       <Router>
       <header>
         <h1 className="my-2 text-center" style={{fontFamily:'arial'}}>Notes From Around the World</h1>
@@ -152,12 +152,18 @@ const Main = (argument1, argument2) => {
                 (slideLeft ? " slide-board-left" : "")
               }
             >
-              <div id="loaderMain" class="spinner-border text-primary" role="status" style={{display: 'none'}} >
-                <span class="sr-only"></span>
+              <div
+                id="loaderMain"
+                className="spinner-border text-primary"
+                role="status"
+                style={{ display: "none" }}
+              >
+                <span className="sr-only"></span>
               </div>
               {notes.length !== 0 &&
                 notesToDisplay.map((note, index) => (
                   <Link
+                    className="text-decoration-none"
                     to={{
                       pathname: `/view-note/${note.note_id}`,
                     }}
@@ -165,9 +171,8 @@ const Main = (argument1, argument2) => {
                   >
                     <div
                       className="note m-2 p-2"
-
-                      style={{ 
-						backgroundColor: `${note.note_color}`, 
+                      style={{
+                        backgroundColor: `${note.note_color}`,
                         position: "relative",
                         left: `${rngesus[index].x}%`,
                         top: `${rngesus[index].y}px`,
@@ -203,7 +208,7 @@ const Main = (argument1, argument2) => {
             <Link to={`/view-note/${notes[randomIndex].note_id}`}>
               <button onClick={randomRoute}>View Random</button>
             </Link>
-          )}           
+          )}
         </footer>
         <Routes>
           <Route path="/new-note" element={<NewNote />} />

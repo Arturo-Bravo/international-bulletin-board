@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CloseIcon from "@material-ui/icons/Close";
 
-const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
+const ViewReplies = ({
+  note,
+  setStatus,
+  viewRepliesClick,
+  slideUp,
+  slideDown,
+}) => {
   const [replyCount, setReplyCount] = useState(0);
   const [noteMessage, setMessage] = useState({});
 
@@ -110,7 +116,11 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
     >
       <div
         id="repliesView"
-        className="notebackground p-5"
+        className={
+          "notebackground p-5" +
+          (slideUp ? " slide-note-up" : "") +
+          (slideDown ? " slide-note-down" : "")
+        }
         style={{ backgroundColor: `${note.note_color}` }}
       >
         <button className="close" onClick={closeBox} aria-label="close">
@@ -120,11 +130,11 @@ const ViewReplies = ({ note, setStatus, viewRepliesClick }) => {
         <p>Original Language: {noteMessage.detected_language} </p>
         <div
           id="loaderReplies"
-          class="spinner-border text-primary"
+          className="spinner-border text-primary"
           role="status"
           style={{ display: "none" }}
         >
-          <span class="sr-only"></span>
+          <span className="sr-only"></span>
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <label htmlFor="language">Display Language: </label>

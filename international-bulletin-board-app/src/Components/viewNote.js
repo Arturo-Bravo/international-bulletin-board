@@ -118,7 +118,7 @@ const ViewNote = () => {
     return (
       <div className="h-100 w-100 backdrop">
         <div className="d-flex align-items-center justify-content-around row h-75 w-100">
-          <div className="mb-2 col-md-5 col-10 slide-in-right">
+          <div className="mb-2 col-md-5 col-10 slide-center">
             <div
               id="noteView"
               className="notebackground p-4"
@@ -131,11 +131,11 @@ const ViewNote = () => {
               <p>Original Language: {note.detected_language}</p>
               <div
                 id="loader"
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 role="status"
                 style={{ display: "none" }}
               >
-                <span class="sr-only"></span>
+                <span className="sr-only"></span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -199,11 +199,11 @@ const ViewNote = () => {
               <p>Original Language: {note.detected_language} </p>
               <div
                 id="loader"
-                class="spinner-border text-primary"
+                className="spinner-border text-primary"
                 role="status"
                 style={{ display: "none" }}
               >
-                <span class="sr-only"></span>
+                <span className="sr-only"></span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="language">Display Language: </label>
@@ -266,11 +266,11 @@ const ViewNote = () => {
           <p>Original Language: {note.detected_language}</p>
           <div
             id="loader"
-            class="spinner-border text-primary"
+            className="spinner-border text-primary"
             role="status"
             style={{ display: "none" }}
           >
-            <span class="sr-only"></span>
+            <span className="sr-only"></span>
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <label htmlFor="language">Display Language: </label>
