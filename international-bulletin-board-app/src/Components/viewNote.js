@@ -292,7 +292,7 @@ const ViewNote = () => {
             />
           </div>
           <p className="my-2">Note:</p>
-          <p className="my-2 border border-dark px-2 mb-4">{note.message}</p>
+          <p className="my-2 border border-dark px-2 mb-4" >{note.message}</p>
 
           <div className="d-flex justify-content-between">
             <button onClick={openReply}>Reply</button>

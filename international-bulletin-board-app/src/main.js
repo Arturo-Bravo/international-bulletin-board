@@ -130,8 +130,9 @@ const Main = (argument1, argument2) => {
     <div>
       <Router>
       <header>
-        <h1 className="my-2 text-center">Notes From Around the World</h1>
+        <h1 className="my-2 text-center" style={{fontFamily:'arial'}}>Notes From Around the World</h1>
       </header>
+      <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet"></link> 
         <div className="container-fluid">
           <div id="notesBox" className="row justify-content-center">
             {noteDisplayIndex.start !== 0 && (
@@ -170,6 +171,7 @@ const Main = (argument1, argument2) => {
                         position: "relative",
                         left: `${rngesus[index].x}%`,
                         top: `${rngesus[index].y}px`,
+                        fontFamily:'schoolbell'
                       }}
                     >
                       {note.message.length > 15
